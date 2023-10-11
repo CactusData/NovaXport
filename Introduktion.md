@@ -1,13 +1,12 @@
 # NovaXport
-### En Windows-service til eksport af fakturaer i Novax til e-conomic
-
-
-
 
 ![Novax(R) e-conomic(R)][Title logos] 
+
+### En Windows-service til eksport af fakturaer i Novax til e-conomic
+<hr><br>
 
 ### Introduktion
 
 
 
-[Title logos]: images/Novax-economic%20200.png
+[Title logos]: images/Novax-e-conomic%20200.png
