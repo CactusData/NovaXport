@@ -35,10 +35,17 @@
 8. Opdatér [siden med dine apps i e-conomic][EC extensions] for at få vist og bekræftet tilknytningen af appen:
 
 ![App-liste][App list]
-    
+
+
+<hr>
+
+### Information og support
+
+![Cactus Data ApS][Cactus Data logo]
 
 
 
+[Cactus Data logo]: images/cactuslogopale.png
 [Title logos]: images/Novax-e-conomic%20200.png
 [Attach app]: images/ec-apps-001.png
 [Attached app]: images/ec-apps-002.png
