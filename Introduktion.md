@@ -2,7 +2,9 @@
 
 ![NOVAX(R) e-conomic(R)][Title logos] 
 
-### Fuldautomatisk rutine til eksport af fakturaer i NOVAX til e-conomic
+## Fuldautomatisk rutine til eksport af fakturaer i NOVAX til e-conomic
+
+### Introduktion
 
 **NovaXport** henter fakturaer oprettet og gemt i NOVAX-systemet og eksporterer dem til et regnskab oprettet i e-conomic og bogfører dem dér - helt automatisk.
 
@@ -16,9 +18,66 @@ Flowet er ligefremt:
 
 Én installation af **NovaXport** kan håndtere flere klinikker og flere selskaber i e-conomic.
 
-<hr><br>
+### Funktionen i detaljer
 
-### Introduktion
+NOVAX-systemet gemmer alle fakturaer i en mappe på serveren, der afvikler NOVAX-systemet for klinikken, i standard OIOUBL-dokumentformatet.
+
+Efter en tidsplan, som i flere intervaller kan justeres fra ét minut til mange timer hen over døgnet, gør **NovaXport** følgende:
+
+- logger ind på filserveren
+- henter den aktuelle fakturaliste
+- opdaterer sin egen fakturaliste, som gemmes i en lokal database
+- logger ud af serveren
+
+Dette forløb gentages for hver yderligere server, hvis flere klinikker håndteres.
+
+Dernæst eksporteres de fakturaer, der ikke allerede er eksporteret:
+
+- henter fra sin fakturaliste en liste over fakturaer, der ikke er eksporteret
+- logger ind på filserveren
+- læser den første faktura og eksporterer den til e-conomic
+- bogfører fakturaen i e-conomic
+- markerer fakturaen i fakturalisten som eksporteret
+- fortsætter med at læse, eksportere og bogføre fakturaer, indtil der ikke er flere
+- logger ud af filserveren
+
+Dette forløb gentages for hver yderligere server, hvis flere klinikker håndteres.
+
+Til sidst:
+
+- forløbet logges i Windows Logbog
+- holder pause til næste kørsel
+
+De eksporterede fakturaer vil i e-conomic kunne ses på sædvanlig måde, dels i Arkiv under Salg, dels i loggen.
+
+## Installation
+
+### NOVAX
+
+Kun NOVAX har administratorrettighed til serveren, der afvikler NOVAX-systemet. Det skal derfor aftales med NOVAX' support, at de gør følgende:
+
+- deler mappen med fakturafilerne som et Windows SMBv3 share, fx med navnet *Faktura*
+- opretter en ny bruger, fx med navnet *NovaxEksport*, med læseadgang til den delte mappe
+
+### E-conomic
+
+
+
+### Netværk og maskine
+
+Serveren, der afvikler NOVAX-systemet, er typisk installeret i et lukket netværk, der hører til NOVAX, og som kun NOVAX har adgang til. Det er blandt andet derfor, at NOVAX-systemet betjenes via Windows Fjernskrivebord.
+
+For at give **NovaXport** adgang til serveren, er der tre muligheder:
+
+- opsætte en separat server ind i deres netværk, hvor **NovaXport** kan installeres
+- etablere en VPN-forbindelse mellem NOVAX' netværk og jeres eget, så **NovaXport** kan køre på en maskine hos jer selv
+- installere **NovaXport** på den eksisterende NOVAX-server
+
+Ingen af de tre muligheder kan realiseres uden en aftale med NOVAX.
+
+Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem jeres IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under jeres kontrol sættes op, og **NovaXport** installeres på den.
+
+
 
 ## Konfiguration
 
