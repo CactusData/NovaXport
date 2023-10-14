@@ -55,9 +55,9 @@ De eksporterede fakturaer vil i e-conomic kunne ses på sædvanlig måde, dels i
 ## Supplerende artikler
 
 De nærmere detaljer i installation, konfiguration mv. af **NovaXport** findes her:
-- Netværk
-- Installation
-- Konfiguration
+
+- [Installation](https://github.com/CactusData/NovaXport/blob/main/Installation.md)
+- [Konfiguration](https://github.com/CactusData/NovaXport/blob/main/Configuration.md)
 - Vedligeholdelse
 
 
