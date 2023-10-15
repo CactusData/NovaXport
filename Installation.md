@@ -87,27 +87,53 @@ Herefter skal der som minimum være disse filer i mapperne:
 Der vil i programmappen også være disse hjælpefiler:
 
 - `C:\Program Files\Novax Export`
-  - `NovaXport Create.ps1`
-  - `NovaXport Delete.ps1`
-  - `NovaXport Start.ps1`
-  - `NovaXport Stop.ps1`
+  - `NovaXport Create.cmd`
+  - `NovaXport Delete.cmd`
+  - `NovaXport Start.cmd`
+  - `NovaXport Stop.cmd`
   - `DB.Browser.for.SQLite.msi`
 
-#### Installation af NovaXport tjenesten
+#### Tjenesten
 
-De fire PowerShell-filer indeholder de nødvendige kommandoer til - hvad deres navne siger - at:
+*De fire* batch-filer indeholder de nødvendige kommandoer til - hvad deres navne siger - at:
 
 - oprette tjenesten
 - slette tjenesten
 - starte tjenesten
 - stoppe tjenesten
 
+> NB: Alle kommandofiler skal køres fra en **Kommandoprompt** åbnet med administratorrettigheder.
+
+*Den første* er den kritiske og ser således ud:
 
 
-Den femte er installationsfilen til `DB Browser (SQLite)`, som - hvis den installeres - kan bruges til at studere **NovaXport**s database.
 
+Installationen af **NovaXport** kan verificeres ved at vise Windows' liste over  installerede Windows Tjenester:
 
+![NovaXport Service][Service installed] 
 
+Yderligere bør **NovaXport** egenskaber verificeres. 
+
+Disse skal vise de to navne, dens beskrivelse, at den kører, og at den startes med forsinkelse:
+
+![NovaXport Service Properties][Service properties] 
+
+*De tre sidste* er trivielle. De bruges til at stoppe, starte eller slette tjenesten.
+
+#### Database-manager
+
+*Den femte* fil er installationsfilen til `DB Browser (SQLite)`, som - hvis den installeres - kan bruges til at studere **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se afsnit Vedligeholdelse).
+
+Køres installationen msi-filen med standardindstillinger og -valg, oprettes en genvej på Skrivebord. Den kan med fordel trimmes til at have disse indstillinger:
+
+```
+Destination: 
+    "%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" NovaxData.db
+
+Start i:
+    "%ProgramData%\Novax Export"
+```
+og omdøbes til fx: **DB Browser NovaXport**. 
 <hr>
 
 [Cactus Data logo]: images/cactuslogopale.png
@@ -116,4 +142,6 @@ Den femte er installationsfilen til `DB Browser (SQLite)`, som - hvis den instal
 [Attached app]: images/ec-apps-002.png
 [App list]: images/ec-apps-003.png
 [Data flow]: images/NovaXport%20Diagram.drawio%2024.png
+[Service installed]: images/NovaXport%20Service.png
+[Service properties]: images/NovaXport%20Service%20Properties.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
