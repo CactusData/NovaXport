@@ -87,53 +87,166 @@ Herefter skal der som minimum være disse filer i mapperne:
 Der vil i programmappen også være disse hjælpefiler:
 
 - `C:\Program Files\Novax Export`
-  - `NovaXport Create.cmd`
-  - `NovaXport Delete.cmd`
-  - `NovaXport Start.cmd`
-  - `NovaXport Stop.cmd`
+  - `NovaXport_Create.cmd`
+  - `NovaXport_Remove.cmd`
+  - `NovaXport_Start.cmd`
+  - `NovaXport_Stop.cmd`
+  - `NovaXport_Status.cmd`
+  - `NovaXport Service Prompt.lnk`
   - `DB.Browser.for.SQLite.msi`
 
 #### Tjenesten
 
-*De fire* batch-filer indeholder de nødvendige kommandoer til - hvad deres navne siger - at:
+*De fem* kommando-filer indeholder de nødvendige kommandoer til - hvad deres navne siger - at:
 
 - oprette tjenesten
-- slette tjenesten
+- fjerne tjenesten
 - starte tjenesten
 - stoppe tjenesten
+- vise tjenestens status
 
 > NB: Alle kommandofiler skal køres fra en **Kommandoprompt** åbnet med administratorrettigheder.
+>
+> Derfor er der også inkluderet en *genvej*, `NovaXport Service Prompt`, der åbner `cmd.exe` med administratorrettigheder. Den kan med fordel kopieres til *Skrivebord*.
 
-*Den første* er den kritiske og ser således ud:
+*Den første* kommandofil er den kritiske, for det er den, der bruges til at registrere `NovaXport.exe` som en tjeneste med den korrekte konfiguration ved gentagne kald af `sc.exe`. Den ser således ud:
+
+```cmd
+: Command file for registering NovaXport as a service.
+: V 1.0.
+: 2023-10-15. Gustav Brock, Cactus Data ApS, CPH.
+
+@echo off
+
+: Variables.
+setlocal
+set novaxport=NovaXport
+set displayname=Novax eksport
+set description=Novax fakturaeksport til e-conomic
+
+: Header block.
+echo Opret %novaxport% tjenesten.
+echo V 1.0.
+echo 2023-10-15. Gustav Brock, Cactus Data ApS, CPH.
+echo ----------------------------------------------
+echo.
+
+: Register the service.
+echo Opretter %novaxport% som tjeneste ...
+echo.
+sc.exe create %novaxport% binpath="%ProgramFiles%\Novax Export\NovaXport.exe"
+
+: Configure the names of the service and specify delayed auto start.
+sc.exe config %novaxport% displayname="%displayname%"
+sc.exe config %novaxport% start=delayed-auto
+: Add the description to the service.
+sc.exe description %novaxport% "%description%"
+echo.
+
+: Display the result.
+sc.exe queryex %novaxport%
+echo.
+
+: Clean up and await a key press.
+endlocal
+echo Et tastetryk afslutter.
+pause > null
+
+: EOF
+```
+Køres den, registreres **NovaXport** som en tjeneste, og det vises således:
+
+```txt
+C:\Program Files\Novax Export>NovaXport_Create
+Opret NovaXport tjenesten.
+V 1.0.
+2023-10-15. Gustav Brock, Cactus Data ApS, CPH.
+----------------------------------------------
+
+Opretter NovaXport som tjeneste ...
+
+[SC] CreateService SUCCESS
+[SC] ChangeServiceConfig SUCCESS
+[SC] ChangeServiceConfig SUCCESS
+[SC] ChangeServiceConfig2 SUCCESS
 
 
+SERVICE_NAME: NovaXport
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 1077  (0x435)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+        PID                : 0
+        FLAGS              :
 
-Installationen af **NovaXport** kan verificeres ved at vise Windows' liste over  installerede Windows Tjenester:
+Et tastetryk afslutter.
+```
+
+Bemærk, at tjenesten ikke vil være startet, da den øvrige konfigurationen måske ikke er klar, og det derfor ikke vil give mening at tjenesten kører.
+
+Den korrekte installationen af **NovaXport** bør verificeres ved at vise Windows' liste over  installerede Windows Tjenester:
 
 ![NovaXport Service][Service installed] 
 
 Yderligere bør **NovaXport** egenskaber verificeres. 
 
-Disse skal vise de to navne, dens beskrivelse, at den kører, og at den startes med forsinkelse:
+Disse skal vise de to navne, dens beskrivelse, om den kører, og at den startes med forsinkelse:
 
 ![NovaXport Service Properties][Service properties] 
 
-*De tre sidste* er trivielle. De bruges til at stoppe, starte eller slette tjenesten.
+*De fire sidste* kommandofiler er trivielle. De bruges til at *starte*, *stoppe* eller *fjerne* tjenesten eller få vist dens *status*.
+
+Tjenesten kan fx startes med `NovaXport_Start.cmd`, og det vil give dette output:
+
+```txt
+C:\Program Files\Novax Export>NovaXport_Start.cmd
+Start NovaXport tjenesten.
+V 1.0.
+2023-10-15. Gustav Brock, Cactus Data ApS, CPH.
+----------------------------------------------
+
+Kalder start af NovaXport ...
+
+Tjenesten Novax eksport starter.
+Tjenesten Novax eksport er startet.
+
+
+SERVICE_NAME: NovaXport
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 4  RUNNING
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+Et tastetryk afslutter.
+```
+
+På tilsvarende måde kan tjenesten stoppes, fjernes og få vist sin status.
+
 
 #### Database-manager
 
-*Den femte* fil er installationsfilen til `DB Browser (SQLite)`, som - hvis den installeres - kan bruges til at studere **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se afsnit Vedligeholdelse).
+*Den sjette* fil er installationsfilen til `DB Browser (SQLite)`, som - hvis den installeres - kan bruges til at studere **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se afsnit Vedligeholdelse).
 
 Køres installationen msi-filen med standardindstillinger og -valg, oprettes en genvej på Skrivebord. Den kan med fordel trimmes til at have disse indstillinger:
 
 ```
 Destination: 
-    "%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" NovaxData.db
+    "%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" -t Company NovaxData.db
 
 Start i:
     "%ProgramData%\Novax Export"
 ```
-og omdøbes til fx: **DB Browser NovaXport**. 
+og omdøbes til fx: **NovaXport Database**. 
+
+Åbnes denne genvej, viser *DB Browser* straks tabellen *Company*, og de øvrige tabeller kan uden videre vises:
+
+![NovaxData Company][Display table Company] 
+
 <hr>
 
 [Cactus Data logo]: images/cactuslogopale.png
@@ -144,4 +257,5 @@ og omdøbes til fx: **DB Browser NovaXport**.
 [Data flow]: images/NovaXport%20Diagram.drawio%2024.png
 [Service installed]: images/NovaXport%20Service.png
 [Service properties]: images/NovaXport%20Service%20Properties.png
+[Display table Company]: images/NovaxDataCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
