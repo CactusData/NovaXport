@@ -5,7 +5,7 @@
 
 ## Konfiguration
 
-### Programdata
+### Datafiler
 
 Datafilerne til **NovaXport** skal ligge i mappen `Novax Export` i systemmappen `%ProgramData%`. 
 
@@ -28,27 +28,15 @@ Den anden, databasen, indeholder *fire lister*, der styrer den daglige funktion 
 4. Ugetidsplan for hvornår og hvor tit, **NovaXport** skal genlæse fakturalisten på serveren
 
 
-#### Credentials
+#### Adgang til servere og e-conomic
 
-Den første indeholder brugernavn og adgangskode til den delte mappe med fakturafilerne på den eller de filservere, der afvikler NOVAX.
+Filen `Credentials.xml` indeholder brugernavn og adgangskode for brugerkontoen, der har adgang til den delte mappe med fakturafilerne på den eller de filservere, der afvikler NOVAX.
 
 > Det anbefales kraftigt ikke at bruge en normal brugerkonto, men at oprette en speciel brugerkonto, der kun bruges af **NovaXport**, kun med læseadgang til den delte mappe.
 >
 > Dette skal gøres af NOVAX, da de administrerer serveren. Det aktuelle brugernavn og tilhørende adgangskode skal derfor aftales med NOVAX og skal være kendt af NOVAX' support.
 
-Adgangen styres af de tre felter:
-
-- `Domain`
-- `Username`
-- `Password`
-
-Det fjerde felt:
-
-- `AppSecretToken`
-
-indeholder det token, **NovaXport** er tildelt af e-conomic. Det må ikke rettes eller slettes.
-
-NOVAX' domæne hedder typisk `HOSTING`, og hvis brugerkontoen hedder `NovaxEksport`, og adgangskoden er `VoresMegetLangeAdgangskode`, skal filen rettes til således:
+Det er en standard XML-fil, der kan redigeres med fx Notesblok, og ser således ud:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -60,45 +48,57 @@ NOVAX' domæne hedder typisk `HOSTING`, og hvis brugerkontoen hedder `NovaxEkspo
 </ReaderAccount>
 ```
 
+Adgangen til den delte mappe styres af de tre felter:
 
+- `Domain`
+- `Username`
+- `Password`
 
-## Tilføj selskab (klinik)
+NOVAX' domæne hedder typisk `HOSTING`. Brugerkontoen (her `NovaxEksport`) og adgangskoden (her `VoresMegetLangeAdgangskode`) skal rettes til som aftalt med NOVAX.
+
+Det fjerde felt:
+
+- `AppSecretToken`
+
+indeholder det token, **NovaXport** i sin egenskab af en "e-conomic app" er tildelt af e-conomic. Det er normalt allerede skrevet ind i filen og må ikke rettes eller slettes.
+
+### Tilføj selskab (klinik)
 
 For at NovaXport kan sende fakturaer til e-conomic, skal to ting være på plads.
 
-For det første skal appen NovaXport i e-conomic <i>tilknyttes selskabet</i> ved at blive tilføjet listen over apps, som selskabet kan kommunikere med.
+For det første skal i e-conomic appen NovaXport *tilknyttes selskabet* ved at blive tilføjet listen over apps, som selskabet kan kommunikere med.
 
-Dernæst skal selskabet i NovaXPorts <i>tilføjes listen over selskaber</i>, der kan eksporteres fakturaer til.
+Dernæst skal selskabet i NovaXPorts database *tilføjes listen over selskaber*, der kan eksporteres fakturaer til.
 
-Når appen (NovaXport) tilføjes i e-conomic, generes en <i>unik nøgle</i> (Adgangs-ID/token), som identificerer de to over for hinanden. Med dette Adgangs-ID:
+Når appen (NovaXport) tilføjes i e-conomic, generes en *unik nøgle* (Adgangs-ID/token), som identificerer de to over for hinanden. Med dette Adgangs-ID:
 
-- accepterer e-conomic, at dette selskab kan kommunikere med NovaXport
-- fortæller NovaXport, når den kontakter e-conomic, hvilket selskab der skal kommunikeres med 
+- accepterer e-conomic, at dette selskab kan kommunikere med **NovaXport**
+- fortæller **NovaXport**, når den kontakter e-conomic, hvilket selskab der skal kommunikeres med 
 
-### Tilknyt app i e-conomic
+#### Tilknyt app i e-conomic
 
 Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighed.
 
-1. Log ind med denne brugerkonto på [Visma Home](https://connect.visma.com/)
+1. Log ind med denne brugerkonto på [Visma Home][Visma home]
 3. Hvis I har flere selskaber, så vælg det, der skal eksporteres til fra NOVAX
-4. Vælg fra topmenuen <b>Indstillinger</b> punktet <u>Alle indstillinger</u>
-5. Vælg i menuen til venstre punktet <u>Apps</u>
-6. Nu vises enten en liste med de apps, der tidligere er aktiveret, eller siden: <i>Sådan tilføjer du apps</i>
+4. Vælg fra topmenuen *Indstillinger* punktet *Alle indstillinger*
+5. Vælg i menuen til venstre punktet *Apps*
+6. Nu vises enten en liste med de apps, der tidligere er aktiveret, eller denne side: *Sådan tilføjer du apps*
 
-7.  1. <i>Kopiér</i> nu [dette link](https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201)
+7.  1. *Kopiér* nu [dette link][App link]
     2. Åbn en ny side i browseren
-    3. <i>Indsæt</i> derefter linket i den nye side og tryk <i>Enter</i>
-    4. Denne side vises:
+    3. *Indsæt* derefter linket (kopieret i pkt. 1) i den nye side og tryk *Enter*
+    4. Denne side vises nu:
 
     <br>![Tilføj app][Attach app]<br>
     
-    5. <b>Kontrollér, at aftalenummeret er korrekt</b>
-    6. Klik på knappen <b>Tilføj app</b>
+    5. **Kontrollér, at aftalenummeret er korrekt**
+    6. Klik på knappen *Tilføj app*
     7. Denne side vises nu:
 
     <br>![App tilføjet][Attached app]<br>
 
-    8. Det viste ID er det <b>Adgangs-ID</b>, som skal bruges ved konfigurationen af NovaXport
+    8. Det viste ID er det **Adgangs-ID**, som skal bruges ved konfigurationen af NovaXport (se næste afsnit)
     9. Luk siden
 
 8. Opdatér [siden med dine apps i e-conomic][EC extensions] for at få vist og bekræftet tilknytningen af appen:
@@ -109,7 +109,22 @@ E-conomic vil nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
 Næste trin er at muliggøre dette for NovaXport.
 
-### Tilknyt selskab til NovaXport
+#### Tilknyt selskab i NovaXport
+
+Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under Installation), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
+
+Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken*:
+- *Cvr*: Selskabets *CVR-nummer*
+- *AgreementGrantToken*: Det *Adgangs-ID*, der blev oprettet i e-conomic - se afsnittet ovenfor.
+
+Feltet *Name* kan også udfyldes med selskabets navn, men det behøves ikke; **NovaXport** vil selv slå navnet op i CVR-registeret og indsætte det, hvis feltet er tomt.
+
+Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres.
+
+Resultatet skal (hvis uden selskabsnavn) ligne dette:
+
+![Tilknyt selskab][New company]
+
 
 
 
@@ -121,4 +136,7 @@ Næste trin er at muliggøre dette for NovaXport.
 [Attached app]: images/ec-apps-002.png
 [App list]: images/ec-apps-003.png
 [Data flow]: images/NovaXport%20Diagram.drawio%2024.png
+[New company]: images/NewCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
+[App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201
+[Visma home]: https://connect.visma.com/
