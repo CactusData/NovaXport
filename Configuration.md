@@ -18,15 +18,23 @@ Her findes to datafiler:
 - `Credentials.xml`
 - `NovaxData.db`
 
-Det håndteres således:
+Den første indeholder brugernavn og adgangskode til NOVAX-serverne.
+
+Den anden, databasen, indeholder *fire lister*, der styrer den daglige funktion af **NovaXport**:
+
+1. Serverne, der skal læses fakturaer fra - minimum én
+2. Selskaberne hos e-conomic, der skal eksporteres fakturaer til - minimum ét
+3. Fakturaerne (numre og dato) og deres status
+4. Ugetidsplan for hvornår og hvor tit, **NovaXport** skal genlæse fakturalisten på serveren
+
 
 #### Credentials
 
 Den første indeholder brugernavn og adgangskode til den delte mappe med fakturafilerne på den eller de filservere, der afvikler NOVAX.
 
-> Det anbefales kraftigt ikke at bruge en normal brugerkonto, men at oprette en speciel brugerkonto kun med læseadgang til den delte mappe.
+> Det anbefales kraftigt ikke at bruge en normal brugerkonto, men at oprette en speciel brugerkonto, der kun bruges af **NovaXport**, kun med læseadgang til den delte mappe.
 >
-> Dette skal gøres af NOVAX, hvis de administrerer serveren.
+> Dette skal gøres af NOVAX, da de administrerer serveren. Det aktuelle brugernavn og tilhørende adgangskode skal derfor aftales med NOVAX og skal være kendt af NOVAX' support.
 
 Adgangen styres af de tre felter:
 
@@ -42,13 +50,13 @@ indeholder det token, **NovaXport** er tildelt af e-conomic. Det må ikke rettes
 
 NOVAX' domæne hedder typisk `HOSTING`, og hvis brugerkontoen hedder `NovaxEksport`, og adgangskoden er `VoresMegetLangeAdgangskode`, skal filen rettes til således:
 
-```htm
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ReaderAccount>
     <Domain>HOSTING</Domain>
     <Username>NovaxEksport</Username>
     <Password>VoresMegetLangeAdgangskode</Password>
-    <AppSecretToken>2RIukREbtPIvuN90ry33My1cazJtx3LUX9bFsCMVBA81</AppSecretToken>
+    <AppSecretToken>2RIukREatPIvuN92ry89My1cazJtx3LUX9bFsCMVBA81</AppSecretToken>
 </ReaderAccount>
 ```
 

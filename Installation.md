@@ -8,32 +8,37 @@
 
 Kun NOVAX har administratorrettighed til serveren, der afvikler NOVAX-systemet. Det skal derfor aftales med NOVAX' support, at de gør følgende:
 
-- deler mappen med fakturafilerne som et Windows SMBv3 share, fx med navnet *Faktura*
-- opretter en ny bruger, fx med navnet *NovaxEksport*, med læseadgang til den delte mappe
+- deler mappen med fakturafilerne som et *Windows SMBv3 share*, helst med navnet *Faktura*
+- opretter en ny bruger med et beskrivende navn, fx *NovaxEksport*, med læseadgang til denne delte mappe
+
+Eksempler på den fysiske mappe på serveren, hvor fakturafilerne bliver gemt:
+- `F:\App8\Novax\Finans`
+- `F:\App8\Økonomifiler`
+- `F:\C5`
 
 ### E-conomic
 
 Der er ikke noget, der kan installeres i e-conomic, som er web-baseret, men der er en række punkter, der skal konfigureres korrekt af en bruger med administratorrettigheder.
 
-Disse er beskrevet i: [Konfiguration](https://github.com/CactusData/NovaXport/blob/main/Configuration.md).
+Disse er beskrevet i: [Konfiguration][Configuration].
 
 ### Netværk
 
-Serveren, der afvikler NOVAX-systemet, er typisk installeret i et lukket netværk, der hører til NOVAX, og som kun NOVAX har adgang til. Det er blandt andet derfor, at NOVAX-systemet betjenes via Windows Fjernskrivebord.
+Serveren, der afvikler NOVAX-systemet, er typisk installeret i et lukket netværk, der hører til NOVAX, og som kun NOVAX har adgang til, og som NOVAX administrerer. Det er blandt andet derfor, at brugeren betjener NOVAX-systemet via *Fjernskrivebord*.
 
 For at give **NovaXport** adgang til serveren, er der tre muligheder:
 
-- opsætte en separat server ind i deres netværk, hvor **NovaXport** kan installeres
+- opsætte en separat server, som **NovaXport** installeres på, inde i NOVAX' netværk
 - etablere en VPN-forbindelse mellem NOVAX' netværk og jeres eget, så **NovaXport** kan køre på en maskine hos jer selv
 - installere **NovaXport** på den eksisterende NOVAX-server
 
 Ingen af de tre muligheder kan realiseres uden en aftale med NOVAX.
 
-Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem jeres IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under jeres kontrol sættes op, og **NovaXport** installeres på den.
+Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem jeres IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under jeres kontrol og administration sættes op, og **NovaXport** installeres på den.
 
 #### VPN-forbindelse
 
-Vælges denne løsning, skal **SMBv3**-protokollen kunne passere firewallen:
+Vælges denne løsning, skal **SMBv3**-protokollen kunne passere firewallen. Derfor skal denne port være åben:
 
 ```console
 TCP 445
@@ -43,17 +48,17 @@ TCP 445
 
 Der er ingen særlige krav til maskinen, der skal afvikle **NovaXport**, ud over hvad Windows kræver. Da maskinen i det daglige vil passe sig selv, kan følgende krav formuleres:
 
-#### Krav, maskine
+#### Krav til maskine
 
 - minimum: Stabil maskine af anerkendt fabrikat
 - anbefalet: Maskine af servertype af anerkendt fabrikat
 
-#### Krav, Windows
+#### Krav til Windows-version
 
 - minimum: Windows 10 Pro (64-bit)
 - anbefalet: Windows Server 2022 eller senere
 
-Sikkerhedskopiering og vedligeholdelse bør følge samme procedurer som for øvrige servere.
+Opdatering, sikkerhedskopiering og vedligeholdelse bør som minimum følge samme procedurer som for jeres øvrige maskiner.
 
 
 ### NovaXport
@@ -109,11 +114,11 @@ Der vil i programmappen også være disse hjælpefiler:
 >
 > Derfor er der også inkluderet en *genvej*, `NovaXport Service Prompt`, der åbner `cmd.exe` med administratorrettigheder. Den kan med fordel kopieres til *Skrivebord*.
 
-*Den første* kommandofil er den kritiske, for det er den, der bruges til at registrere `NovaXport.exe` som en tjeneste med den korrekte konfiguration ved gentagne kald af `sc.exe`. Den ser således ud:
+*Den første* kommandofil er den kritiske, for det er den, der ved gentagne kald af `sc.exe` bruges til at registrere `NovaXport.exe` som en tjeneste med den korrekte konfiguration. Den ser således ud:
 
 ```cmd
 : Command file for registering NovaXport as a service.
-: V 1.0.
+: V 1.0.1
 : 2023-10-15. Gustav Brock, Cactus Data ApS, CPH.
 
 @echo off
@@ -150,7 +155,7 @@ echo.
 : Clean up and await a key press.
 endlocal
 echo Et tastetryk afslutter.
-pause > null
+pause > nul
 
 : EOF
 ```
@@ -184,7 +189,7 @@ SERVICE_NAME: NovaXport
 Et tastetryk afslutter.
 ```
 
-Bemærk, at tjenesten ikke vil være startet, da den øvrige konfigurationen måske ikke er klar, og det derfor ikke vil give mening at tjenesten kører.
+> Bemærk, at tjenesten ikke vil være startet, da den øvrige konfigurationen måske ikke er klar, og det derfor ikke vil give mening, at starte tjenesten inden da.
 
 Den korrekte installationen af **NovaXport** bør verificeres ved at vise Windows' liste over  installerede Windows Tjenester:
 
@@ -198,12 +203,12 @@ Disse skal vise de to navne, dens beskrivelse, om den kører, og at den startes 
 
 *De fire sidste* kommandofiler er trivielle. De bruges til at *starte*, *stoppe* eller *fjerne* tjenesten eller få vist dens *status*.
 
-Tjenesten kan fx startes med `NovaXport_Start.cmd`, og det vil give dette output:
+Fx kan tjenesten startes med `NovaXport_Start.cmd`, og det vil give dette output:
 
 ```txt
 C:\Program Files\Novax Export>NovaXport_Start.cmd
 Start NovaXport tjenesten.
-V 1.0.
+V 1.0.1
 2023-10-15. Gustav Brock, Cactus Data ApS, CPH.
 ----------------------------------------------
 
@@ -230,9 +235,11 @@ På tilsvarende måde kan tjenesten stoppes, fjernes og få vist sin status.
 
 #### Database-manager
 
-*Den sjette* fil er installationsfilen til `DB Browser (SQLite)`, som - hvis den installeres - kan bruges til at studere **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se afsnit Vedligeholdelse).
+Endelig skal `DB Browser (SQLite)` installeres, da den skal bruges til at studere **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se afsnit Vedligeholdelse).
 
-Køres installationen msi-filen med standardindstillinger og -valg, oprettes en genvej på Skrivebord. Den kan med fordel trimmes til at have disse indstillinger:
+*Den sidste* fil - *msi*-filen - er installationsfilen hertil.
+
+Køres installationen med standardindstillinger og -valg, oprettes en genvej på Skrivebord (*DB Browser (SQLite)*). Den kan med fordel trimmes til at have disse indstillinger:
 
 ```
 Destination: 
@@ -243,9 +250,12 @@ Start i:
 ```
 og omdøbes til fx: **NovaXport Database**. 
 
-Åbnes denne genvej, viser *DB Browser* straks tabellen *Company*, og de øvrige tabeller kan uden videre vises:
+Åbnes genvej med denne tilpasning, viser *DB Browser for SQLite* straks tabellen *Company*, og de øvrige tabeller kan man uden videre vælge også at få vist:
 
 ![NovaxData Company][Display table Company] 
+
+Tabellerne styrer den daglige funktion af **NovaXport**. Hvordan er beskrevet under 
+[Konfiguration][Configuration].
 
 <hr>
 
@@ -259,3 +269,4 @@ og omdøbes til fx: **NovaXport Database**.
 [Service properties]: images/NovaXport%20Service%20Properties.png
 [Display table Company]: images/NovaxDataCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
+[Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md
