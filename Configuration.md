@@ -75,6 +75,7 @@ Når appen (NovaXport) tilføjes i e-conomic, generes en *unik nøgle* (Adgangs-
 - accepterer e-conomic, at dette selskab kan kommunikere med **NovaXport**
 - fortæller **NovaXport**, når den kontakter e-conomic, hvilket selskab der skal kommunikeres med 
 
+
 #### Tilknyt app i e-conomic
 
 Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighed.
@@ -109,6 +110,7 @@ E-conomic vil nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
 Næste trin er at muliggøre dette for NovaXport.
 
+
 #### Tilknyt selskab i NovaXport
 
 Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under Installation), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
@@ -137,7 +139,8 @@ Resultatet skal (hvis uden selskabsnavn) ligne dette:
 
 ![Tilknyt selskab][New company]
 
-#### Tilknyt server i NovaXport
+
+### Tilføj server
 
 For hver server, **NovaXport** skal skanne og hente NOVAX-fakturaer fra, skal bruges:
 
@@ -156,16 +159,55 @@ Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres.
 
 Feltoversigt:
 
-| Felt             | Indhold         | Udfyldes | Indtastes          |
-| :--------------- | :-------------- | :------- | :----------------- |
-| Id               | Løbenummer      | Nej      | Ingenting          |
-| Hostname         | Servernavn      | Ja       | Tekst              |
-| ShareName        | Delt mappe-navn | Ja       | Tekst              |
-| Inactive         | Status          | Nej      | Ingenting          |
+| Felt      | Indhold         | Udfyldes | Indtastes |
+| :-------- | :-------------- | :------- | :-------- |
+| Id        | Løbenummer      | Nej      | Ingenting |
+| Hostname  | Servernavn      | Ja       | Tekst     |
+| ShareName | Delt mappe-navn | Ja       | Tekst     |
+| Inactive  | Status          | Nej      | Ingenting |
 
 Resultatet skal ligne dette:
 
 ![Tilknyt server][New server]
+
+
+### Justér tidsplan
+
+Når **NovaXport** tjenesten kører, sker det efter en tidsplan. Efter hver kørsel ser din i tidsplanen, hvor mange minutters pause, den skal holde, før næste kørsel.
+
+Som udgangspunkt er oprettet 24 timeintervaller, hvor pausen er sat til 15 minutter fra kl. 06.00.
+
+Både tidsintervaller og pauser kan justeres til det aktuelle behov, og tidsplanen kan helt eller delvist sættes til kun at være aktiv på hverdage.
+
+Når en kørsel er afsluttet, slås op i tabellen, det nærmeste tidligere starttidspunkt findes, pausen angivet her læses, og tjenesten holder pause i dette antal minutter.
+
+> Justering af tidsplanen er ikke kritisk, da **NovaXport** bruger meget få ressourcer, og en kørsel, hvor der ingen fakturaer er at eksportere, afvikles på få sekunder.
+
+Åbn databasen med databasemanageren og vælg tabellen *Schedule* i kombinationsfeltet *Table*.
+
+Her kan starttidspunktet for tidsintervallerne, pausen (feltet *Interval*) og weekendkørsel justeres. 
+
+Er *Interval* angivet til 0 (nul) eller *Weekend* til 1 (ét), gør tjenesten intet andet end at vente til næste starttidspunkt.
+
+Feltoversigt:
+
+| Felt      | Indhold     | Udfyldes | Indtastes                    |
+| :-------- | :---------- | :------- | :--------------------------- |
+| StartTime | Dato og tid | Ja       | En dato og ønsket starttid   |
+| Interval  | Minutter    | Ja       | 0 eller et tal               |
+| Weekend   | 0 eller 1   | Ja       | 1 for ingen kørsel i weekend |
+
+> I feltet *StartTime* bruges kun tidsdelen, men undlad alligevel at bruge andre datoer end 0001-01-01.
+
+Standardtidsplanen ser således ud:
+
+![Tidspland][New schedule]
+
+
+### Start NovaXport
+
+Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* eller med kommandofilen `NovaXport_Start.cmd` som beskrevet i afsnit [Installation][Installation]. Administratorrettigheder kræves for begge muligheder.
+
 <hr>
 
 [Cactus Data logo]: images/cactuslogopale.png
@@ -176,6 +218,8 @@ Resultatet skal ligne dette:
 [Data flow]: images/NovaXport%20Diagram.drawio%2024.png
 [New company]: images/NewCompany.png
 [New server]: images/NewServer.png
+[New schedule]: images/NewSchedule.png
+[Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201
 [Visma home]: https://connect.visma.com/
