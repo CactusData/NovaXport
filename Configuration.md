@@ -173,7 +173,7 @@ Resultatet skal ligne dette:
 
 ### Justér tidsplan
 
-Når **NovaXport** tjenesten kører, sker det efter en tidsplan. Efter hver kørsel ser din i tidsplanen, hvor mange minutters pause, den skal holde, før næste kørsel.
+Når **NovaXport** tjenesten kører, sker det efter en tidsplan. Efter hver kørsel ser den i tidsplanen, hvor mange minutters pause, den skal holde, før næste kørsel.
 
 Som udgangspunkt er oprettet 24 timeintervaller, hvor pausen er sat til 15 minutter fra kl. 06.00.
 
@@ -194,10 +194,10 @@ Feltoversigt:
 | Felt      | Indhold     | Udfyldes | Indtastes                    |
 | :-------- | :---------- | :------- | :--------------------------- |
 | StartTime | Dato og tid | Ja       | En dato og ønsket starttid   |
-| Interval  | Minutter    | Ja       | 0 eller et tal               |
+| Interval  | Minutter    | Ja       | 0 eller et positivt tal               |
 | Weekend   | 0 eller 1   | Ja       | 1 for ingen kørsel i weekend |
 
-> I feltet *StartTime* bruges kun tidsdelen, men undlad alligevel at bruge andre datoer end 0001-01-01.
+> Fra feltet *StartTime* læses kun tidsdelen, men undlad alligevel at indtaste andre datoer end 0001-01-01.
 
 Standardtidsplanen ser således ud:
 

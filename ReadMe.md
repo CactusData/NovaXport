@@ -60,7 +60,7 @@ De nærmere detaljer i installation, konfiguration mv. af **NovaXport** findes h
 
 - [Installation][Installation]
 - [Konfiguration][Configuration]
-- Vedligeholdelse
+- [Kontrol og vedligeholdelse][Maintenance]
 
 
 ## Information og support
@@ -82,3 +82,4 @@ For hjælp til **NovaXport**, kontakt service@cactus.dk.
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md
 [Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
+[Maintenance]: https://github.com/CactusData/NovaXport/blob/main/Maintenance.md
