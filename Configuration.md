@@ -113,21 +113,59 @@ Næste trin er at muliggøre dette for NovaXport.
 
 Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under Installation), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
 
-Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken*:
-- *Cvr*: Selskabets *CVR-nummer*
-- *AgreementGrantToken*: Det *Adgangs-ID*, der blev oprettet i e-conomic - se afsnittet ovenfor.
+Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken* hhv. selskabets *CVR-nummer* og det *Adgangs-ID*, der blev oprettet i e-conomic - se afsnittet ovenfor.
+
+> Tip: Brug *kopiér/indsæt* med mus eller tastatur til at indsætte *Adgang-ID*.
 
 Feltet *Name* kan også udfyldes med selskabets navn, men det behøves ikke; **NovaXport** vil selv slå navnet op i CVR-registeret og indsætte det, hvis feltet er tomt.
 
-Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres.
+Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres. 
+
+> **VIGTIGT**: Ændringer/tilføjelser gemmes først, når man klikker på *Write Changes* eller taster *Ctrl+S*.
+
+Feltoversigt:
+
+| Felt                | Indhold      | Udfyldes | Indtastes          |
+| :------------------ | :----------- | :------- | :----------------- |
+| Id                  | Løbenummer   | Nej      | Ingenting          |
+| Cvr                 | CVR-nummer   | Ja       | Otte cifre         |
+| Name                | Selskabsnavn | Valgfrit | Tekst              |
+| AgreementGrantToken | Adgangs-ID   | Ja       | 44 cifre/bogstaver |
+| Inactive            | Status       | Nej      | Ingenting          |
 
 Resultatet skal (hvis uden selskabsnavn) ligne dette:
 
 ![Tilknyt selskab][New company]
 
+#### Tilknyt server i NovaXport
 
+For hver server, **NovaXport** skal skanne og hente NOVAX-fakturaer fra, skal bruges:
 
+- Hostname, som er serverens navn på NOVAX' netværk
+- ShareName, som er navnet på den delte mappe med fakturafilerne
 
+> Begge navne oplyses af NOVAX' support og skal kendes for at kunne fortsætte.
+
+Åbn databasen med databasemanageren og vælg tabellen *Server* i kombinationsfeltet *Table*.
+
+Gå til en ny post og indsæt i felterne *Hostname* og *ShareName* hhv. serverens *Hostname* og navnet på dens den *delte mappe* med fakturafilerne oprettet af NOVAX.
+
+Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres. 
+
+> **VIGTIGT**: Ændringer/tilføjelser gemmes først, når man klikker på *Write Changes* eller taster *Ctrl+S*.
+
+Feltoversigt:
+
+| Felt             | Indhold         | Udfyldes | Indtastes          |
+| :--------------- | :-------------- | :------- | :----------------- |
+| Id               | Løbenummer      | Nej      | Ingenting          |
+| Hostname         | Servernavn      | Ja       | Tekst              |
+| ShareName        | Delt mappe-navn | Ja       | Tekst              |
+| Inactive         | Status          | Nej      | Ingenting          |
+
+Resultatet skal ligne dette:
+
+![Tilknyt server][New server]
 <hr>
 
 [Cactus Data logo]: images/cactuslogopale.png
@@ -137,6 +175,7 @@ Resultatet skal (hvis uden selskabsnavn) ligne dette:
 [App list]: images/ec-apps-003.png
 [Data flow]: images/NovaXport%20Diagram.drawio%2024.png
 [New company]: images/NewCompany.png
+[New server]: images/NewServer.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201
 [Visma home]: https://connect.visma.com/
