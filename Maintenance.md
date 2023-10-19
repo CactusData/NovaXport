@@ -6,6 +6,15 @@
 
 ### Rutinekontrol
 
+#### 1. Loggen
+
+**NovaXport**s aktivitet logges i _Windows Logbog_. 
+
+Det lille program _Logbog_, der følger med Windows kan bruges ved heri at slå op under _Windows-logger_ og _Program_ og se efter *Kilde* NovaXport. Men det er langsomt, så det anbefales at bruge *Nirsoft FullEventLogView*, der ligger i undermappen _Nirsoft_ og _genvejen_ hertil, `NovaXPort Log` (begge omtalt under [Installation][Installation]).
+
+Åbnes denne genvej vises straks loggen for **NovaXport** med alt andet filtreret fra.
+
+
 Ved start og stop af tjenesten logges følgende:
 
 | Niveau      | Hændelses-id | Generelt                  |
@@ -22,7 +31,6 @@ Når **NovaXport** kører planmæssigt, sker følgende ved hver kørsel:
 3. Fakturaer eksporteres til e-conomic
 4. Kørslen logges
 5. Pause holdes til næste kørsel
-
 
 Hver kørsel logges i maskinens *Logbog* under *Windows-logger/Program* med NovaXport angivet som *Kilde*.
 
@@ -50,14 +58,14 @@ Hvis *Læsning* og/eller *Eksport* skulle fejle, logges følgende for Hændelses
 Årsagen hertil må naturligvis undersøges.
 
 
-#### 1. Serverne
+#### 2. Serverne
 
 På den enkelte server bliver login og logout registreret i Windows' *Logbog* under *Windows-logger/Security*.
 
 Mislykkede loginforsøg registreres også, hvilket kan være nyttigt ved fejlfinding.
 
 
-#### 2. Fakturalisten
+#### 3. Fakturalisten
 
 Åbn databasen med databasemanageren og vælg tabellen *Invoice* i kombinationsfeltet *Table*.
 
@@ -73,7 +81,10 @@ Den har disse felter:
 
 Fakturafilnavnet har dette format:
 
-`Novax_12345678_11223344_Faktura.xml` eller for en kreditnota:
+`Novax_12345678_11223344_Faktura.xml` 
+
+eller for en kreditnota:
+
 `Novax_12345678_11223344_Kreditnote.xml`
 
 hvor det første tal er fakturanummeret, og det andet er CVR-nummeret.
@@ -93,9 +104,9 @@ Den første er den normale. De to næste bør man undersøge årsagen til.
 > Hvis en faktura ikke er eksporteret og af en eller anden grund heller ikke skal, skrives en dato (fx fakturadatoen) ind i feltet *ExportedAt*. **NovaXport** tror så, at den er faktureret og vil ignorere den fremover.
 
 
-#### 3. e-conomic
+#### 4. e-conomic
 
-Eksporterede fakturaer vil være bogført i e-conomic. De kan derfor ses under *Salg/Arkiv* og følges under *Indstillinge/Log* på sædvanlig måde.
+Eksporterede fakturaer vil være bogført i e-conomic. De kan derfor ses under *Salg/Arkiv* og følges under *Indstillinger/Log* på sædvanlig måde.
 
 
 ### Tilknytning af ekstra server eller selskab
@@ -113,7 +124,7 @@ Der er to datafiler at sikkerhedskopiere. De ligger begge i mappen `%ProgramData
 - `Credentials.xml`
 - `NovaxData.db`
 
-De vil normalt kun være åbnet i få sekunder ad gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
+De vil normalt kun være åbnet i få sekunder af gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
 
 **NovaXPort** selv behøver ikke at sikkerhedskopieres, da den nemt installeres igen, i fald Windows skal retableres eller maskinen udskiftes.
 
@@ -136,17 +147,19 @@ Brug evt. kommandofilerne:
 
 Hvis **NovaXport** skal fjernes fra maskinen, overvej så først, om de to datafiler skal arkiveres. Det er filerne i mappen `%ProgramData%\Novax Export`.
 
-Herefter gøres følgende:
+Herefter gøres følgende med administratorrettigheder:
 
 1. Stop tjenesten
 2. Fjern tjenesten
 3. Slet mappen med datafilerne: `%ProgramData%\Novax Export`
 4. Slet mappen med programfilerne: `%ProgramFiles%\Novax Export`
 
-Brug evt. kommandofilerne:
+Brug til pkt. 1. og 2. evt. kommandofilerne:
 
   - `NovaXport_Stop.cmd`
   - `NovaXport_Remove.cmd`
+
+Pkt. 3. og 4. må udføres manuelt.
 
 <hr>
 
@@ -161,5 +174,6 @@ Brug evt. kommandofilerne:
 [Display table Company]: images/NovaxDataCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md
+[Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
 [Configuration company]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md#Tilføj-selskab-klinik
 [Configuration server]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md#Tilføj-selskab

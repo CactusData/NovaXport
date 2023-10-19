@@ -36,7 +36,9 @@ Filen `Credentials.xml` indeholder brugernavn og adgangskode for brugerkontoen, 
 >
 > Dette skal gøres af NOVAX, da de administrerer serveren. Det aktuelle brugernavn og tilhørende adgangskode skal derfor aftales med NOVAX og skal være kendt af NOVAX' support.
 
-Det er en standard XML-fil, der kan redigeres med fx Notesblok, og ser således ud:
+Det er en standard XML-fil, der kan redigeres med fx _Notesblok_, og det gøres nemmest ved at bruge _genvejen_ `NovaXport Credentials` omtalt under [Installation][Installation]. 
+
+Filen ser således ud:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -48,7 +50,7 @@ Det er en standard XML-fil, der kan redigeres med fx Notesblok, og ser således 
 </ReaderAccount>
 ```
 
-Adgangen til den delte mappe styres af de tre felter:
+Adgangen til den delte mappe på serveren styres af de tre felter:
 
 - `Domain`
 - `Username`
@@ -66,9 +68,9 @@ indeholder det token, **NovaXport** i sin egenskab af en "e-conomic app" er tild
 
 For at NovaXport kan sende fakturaer til e-conomic, skal to ting være på plads.
 
-For det første skal i e-conomic appen NovaXport *tilknyttes selskabet* ved at blive tilføjet listen over apps, som selskabet kan kommunikere med.
+For det første skal "e-conomic appen NovaXport" *tilknyttes selskabet* ved at blive tilføjet listen over apps, som selskabet kan kommunikere med. Det skal gøre inde i e-conomic.
 
-Dernæst skal selskabet i NovaXPorts database *tilføjes listen over selskaber*, der kan eksporteres fakturaer til.
+Dernæst skal selskabet i **NovaXPort**s database *tilføjes listen over selskaber*, der kan eksporteres fakturaer til.
 
 Når appen (NovaXport) tilføjes i e-conomic, generes en *unik nøgle* (Adgangs-ID/token), som identificerer de to over for hinanden. Med dette Adgangs-ID:
 
@@ -108,12 +110,12 @@ Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighe
 
 E-conomic vil nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
-Næste trin er at muliggøre dette for NovaXport.
+Næste trin er at muliggøre dette for **NovaXport**.
 
 
 #### Tilknyt selskab i NovaXport
 
-Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under Installation), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
+Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under [Installation][Installation]), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
 
 Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken* hhv. selskabets *CVR-nummer* og det *Adgangs-ID*, der blev oprettet i e-conomic - se afsnittet ovenfor.
 
@@ -121,28 +123,33 @@ Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken* hhv. sel
 
 Feltet *Name* kan også udfyldes med selskabets navn, men det behøves ikke; **NovaXport** vil selv slå navnet op i CVR-registeret og indsætte det, hvis feltet er tomt.
 
+Feltet *FirstDate* angiver *den tidligste dato* en faktura/kreditnota kan have for at blive eksporteret til e-conomic. Udfyldes det ikke, bruges første dato i det aktuelle regnskabsår.
+
+> Fakturaer/kreditnotaer med ældre dato vil blive registreret i databasen og vist som eksporteret, da de må antages allerede at være blevet eksporteret til e-conomic enten manuelt eller på anden måde. 
+
 Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres. 
 
 > **VIGTIGT**: Ændringer/tilføjelser gemmes først, når man klikker på *Write Changes* eller taster *Ctrl+S*.
 
 Feltoversigt:
 
-| Felt                | Indhold      | Udfyldes | Indtastes          |
-| :------------------ | :----------- | :------- | :----------------- |
-| Id                  | Løbenummer   | Nej      | Ingenting          |
-| Cvr                 | CVR-nummer   | Ja       | Otte cifre         |
-| Name                | Selskabsnavn | Valgfrit | Tekst              |
-| AgreementGrantToken | Adgangs-ID   | Ja       | 44 cifre/bogstaver |
-| Inactive            | Status       | Nej      | Ingenting          |
+| Felt                | Indhold      | Udfyldes | Indtastes               |
+| :------------------ | :----------- | :------- | :---------------------- |
+| Id                  | Løbenummer   | Nej      | Ingenting               |
+| Cvr                 | CVR-nummer   | Ja       | Otte cifre              |
+| Name                | Selskabsnavn | Valgfrit | Tekst                   |
+| AgreementGrantToken | Adgangs-ID   | Ja       | 44 cifre/bogstaver      |
+| Inactive            | Status       | Nej      | Ingenting               |
+| FirstDate           | Datous       | Valgfrit | En dato eller ingenting |
 
-Resultatet skal (hvis uden selskabsnavn) ligne dette:
+Resultatet skal (hvis uden selskabsnavn) ligne dette (feltet _FirstDate_ er dog ikke vist):
 
 ![Tilknyt selskab][New company]
 
 
 ### Tilføj server
 
-For hver server, **NovaXport** skal skanne og hente NOVAX-fakturaer fra, skal bruges:
+For hver server, **NovaXport** skal skanne og læse NOVAX-fakturaer fra, skal bruges:
 
 - Hostname, som er serverens navn på NOVAX' netværk
 - ShareName, som er navnet på den delte mappe med fakturafilerne
@@ -201,7 +208,7 @@ Feltoversigt:
 
 Standardtidsplanen ser således ud:
 
-![Tidspland][New schedule]
+![Tidsplan][New schedule]
 
 
 ### Start NovaXport

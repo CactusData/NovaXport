@@ -17,7 +17,7 @@ Flowet er ligefremt:
 
 ![NovaXport Flow][Data flow] 
 
-Én installation af **NovaXport** kan håndtere flere klinikker og flere selskaber i e-conomic.
+Én installation af **NovaXport** kan uden videre håndtere flere klinikker og flere selskaber i e-conomic.
 
 ### Funktionen i detaljer
 

@@ -18,7 +18,7 @@ Eksempler på den fysiske mappe på serveren, hvor fakturafilerne bliver gemt:
 
 ### E-conomic
 
-Der er ikke noget, der kan installeres i e-conomic, som er web-baseret, men der er en række punkter, der skal konfigureres korrekt af en bruger med administratorrettigheder.
+Der er ikke noget, der kan installeres i e-conomic, da den er web-baseret, men der er en række punkter, der skal konfigureres korrekt af en bruger med administratorrettigheder.
 
 Disse er beskrevet i: [Konfiguration][Configuration].
 
@@ -34,7 +34,7 @@ For at give **NovaXport** adgang til serveren, er der tre muligheder:
 
 Ingen af de tre muligheder kan realiseres uden en aftale med NOVAX.
 
-Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem jeres IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under jeres kontrol og administration sættes op, og **NovaXport** installeres på den.
+Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem klinkkens IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under klinikkens kontrol og administration sættes op, og **NovaXport** installeres på den.
 
 #### VPN-forbindelse
 
@@ -58,7 +58,7 @@ Der er ingen særlige krav til maskinen, der skal afvikle **NovaXport**, ud over
 - minimum: Windows 10 Pro (64-bit)
 - anbefalet: Windows Server 2022 eller senere
 
-Opdatering, sikkerhedskopiering og vedligeholdelse bør som minimum følge samme procedurer som for jeres øvrige maskiner.
+Opdatering, sikkerhedskopiering og vedligeholdelse bør som minimum følge samme procedurer som for klinikkens øvrige maskiner.
 
 
 ### NovaXport
@@ -89,16 +89,28 @@ Herefter skal der som minimum være disse filer i mapperne:
   - `Credentials.xml`
   - `NovaxData.db`
 
-Der vil i programmappen også være disse hjælpefiler:
+Der vil i programmappen også være to undermapper, `Command` og `Desktop Shortcuts`, med disse hjælpefiler:
 
 - `C:\Program Files\Novax Export`
-  - `NovaXport_Create.cmd`
-  - `NovaXport_Remove.cmd`
-  - `NovaXport_Start.cmd`
-  - `NovaXport_Stop.cmd`
-  - `NovaXport_Status.cmd`
-  - `NovaXport Service Prompt.lnk`
-  - `DB.Browser.for.SQLite.msi`
+  - `Command\NovaXport_Create.cmd`
+  - `Command\NovaXport_Remove.cmd`
+  - `Command\NovaXport_Start.cmd`
+  - `Command\NovaXport_Stop.cmd`
+  - `Command\NovaXport_Status.cmd`
+  - `Desktop Shortcuts\NovaXport Service Prompt.lnk`
+  - `Desktop Shortcuts\NovaXport Credentials.lnk`
+  - `Desktop Shortcuts\NovaXport Database.lnk`
+  - `Desktop Shortcuts\NovaXport Log.lnk`
+
+Desuden er der undermapper med hjælpeprogrammer til visning af databasen og logbogen:
+
+  - `SQLiteBrowser`
+  - `Nirsoft`
+
+  Brugen af disse omtales under [Konfiguration][Configuration] og [Kontrol og vedligeholdelse][Maintenance].
+
+
+  Genvejene fra undermappen `Desktop Shortcuts` kan med fordel kopieres til _Skrivebord_, da man så har stort set alt for hånden til pasning af **NovaXport**.
 
 #### Tjenesten
 
@@ -112,7 +124,7 @@ Der vil i programmappen også være disse hjælpefiler:
 
 > NB: Alle kommandofiler skal køres fra en **Kommandoprompt** åbnet med administratorrettigheder.
 >
-> Derfor er der også inkluderet en *genvej*, `NovaXport Service Prompt`, der åbner `cmd.exe` med administratorrettigheder. Den kan med fordel kopieres til *Skrivebord*.
+> Derfor er der også (se ovenfor) inkluderet en *genvej*, `NovaXport Service Prompt`, der åbner `cmd.exe` med administratorrettigheder. Den kan umiddelbart kopieres til *Skrivebord*.
 
 *Den første* kommandofil er den kritiske, for det er den, der ved gentagne kald af `sc.exe` bruges til at registrere `NovaXport.exe` som en tjeneste med den korrekte konfiguration. Den ser således ud:
 
@@ -235,27 +247,15 @@ På tilsvarende måde kan tjenesten stoppes, fjernes og få vist sin status.
 
 #### Database-manager
 
-Endelig skal `DB Browser (SQLite)` installeres, da den skal bruges til at studere **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se afsnit Vedligeholdelse).
+Endelig skal `DB Browser (SQLite)` installeres, da den skal bruges til at opsætte **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se [Konfiguration][Configuration] og [Kontrol og vedligeholdelse][Maintenance]).
 
-*Den sidste* fil - *msi*-filen - er installationsfilen hertil.
+Installationsfilen hertil, `DB.Browser.for.SQLite` ligger i undermappen `SQLiteBrowser`.
 
-Køres installationen med standardindstillinger og -valg, oprettes en genvej på Skrivebord (*DB Browser (SQLite)*). Den kan med fordel trimmes til at have disse indstillinger:
+installationen kan gennemføres med standardindstillinger og -valg. Herefter kan genvejen `NovaXport Database` (se ovenfor) bruges til at åbne **NovaXport**s database direkte.
 
-```
-Destination: 
-    "%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" -t Company NovaxData.db
-
-Start i:
-    "%ProgramData%\Novax Export"
-```
-og omdøbes til fx: **NovaXport Database**. 
-
-Åbnes genvej med denne tilpasning, viser *DB Browser for SQLite* straks tabellen *Company*, og de øvrige tabeller kan man uden videre vælge også at få vist:
+Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Company*, og de øvrige tabeller kan man uden videre vælge også at få vist:
 
 ![NovaxData Company][Display table Company] 
-
-Tabellerne styrer den daglige funktion af **NovaXport**. Hvordan er beskrevet under 
-[Konfiguration][Configuration].
 
 <hr>
 
@@ -270,3 +270,4 @@ Tabellerne styrer den daglige funktion af **NovaXport**. Hvordan er beskrevet un
 [Display table Company]: images/NovaxDataCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md
+[Maintenance]: https://github.com/CactusData/NovaXport/blob/main/Maintenance.md
