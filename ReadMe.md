@@ -81,6 +81,6 @@ For hjælp til **NovaXport**, kontakt service@cactus.dk.
 [Data flow]: images/NovaXport%20Diagram.drawio%2024.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 <!-- [Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md -->
-[Configuration]: https://cactuscata/github.io/NovaXport/Configuration
+[Configuration]: https://cactusdata/github.io/NovaXport/Configuration
 [Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
 [Maintenance]: https://github.com/CactusData/NovaXport/blob/main/Maintenance.md
