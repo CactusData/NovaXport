@@ -175,8 +175,10 @@ Pkt. 3. og 4. må udføres manuelt.
 [Service properties]: images/NovaXport%20Service%20Properties.png
 [Display table Company]: images/NovaxDataCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
-[Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md
-[Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
-[Configuration company]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md#Tilføj-selskab-klinik
-[Configuration server]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md#Tilføj-selskab
+[Installation]: https://cactusdata.github.io/NovaXport/Installation
+[Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
+[Main page]: https://cactusdata.github.io/NovaXport/
+[Configuration]: https://cactusdata.github.io/NovaXport/Configuration
+[Configuration company]: https://cactusdata.github.io/NovaXport/Configuration#Tilføj-selskab-klinik
+[Configuration server]: https://cactusdata.github.io/NovaXport/Configuration#Tilføj-selskab
 [Main page]: https://cactusdata.github.io/NovaXport/
