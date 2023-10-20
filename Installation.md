@@ -259,6 +259,8 @@ Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Co
 
 <hr>
 
+[Tilbage til forsiden][Main page]
+
 [Cactus Data logo]: images/cactuslogopale.png
 [Title logos]: images/Novax-e-conomic%20200.png
 [Attach app]: images/ec-apps-001.png
@@ -269,5 +271,6 @@ Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Co
 [Service properties]: images/NovaXport%20Service%20Properties.png
 [Display table Company]: images/NovaxDataCompany.png
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
-[Configuration]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md
-[Maintenance]: https://github.com/CactusData/NovaXport/blob/main/Maintenance.md
+[Configuration]: https://cactusdata.github.io/NovaXport/Configuration
+[Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
+[Main page]: https://cactusdata.github.io/NovaXport/

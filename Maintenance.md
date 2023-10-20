@@ -163,6 +163,8 @@ Pkt. 3. og 4. må udføres manuelt.
 
 <hr>
 
+[Tilbage til forsiden][Main page]
+
 [Cactus Data logo]: images/cactuslogopale.png
 [Title logos]: images/Novax-e-conomic%20200.png
 [Attach app]: images/ec-apps-001.png
@@ -177,3 +179,4 @@ Pkt. 3. og 4. må udføres manuelt.
 [Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
 [Configuration company]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md#Tilføj-selskab-klinik
 [Configuration server]: https://github.com/CactusData/NovaXport/blob/main/Configuration.md#Tilføj-selskab
+[Main page]: https://cactusdata.github.io/NovaXport/

@@ -239,6 +239,8 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 
 <hr>
 
+[Tilbage til forsiden][Main page]
+
 [Cactus Data logo]: images/cactuslogopale.png
 [Title logos]: images/Novax-e-conomic%20200.png
 [Attach app]: images/ec-apps-001.png
@@ -252,3 +254,6 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201
 [Visma home]: https://connect.visma.com/
+[Installation]: https://cactusdata.github.io/NovaXport/Installation
+[Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
+[Main page]: https://cactusdata.github.io/NovaXport/
