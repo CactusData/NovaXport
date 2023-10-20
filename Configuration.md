@@ -108,7 +108,29 @@ Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighe
 
 ![App-liste][App list]
 
-E-conomic vil nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
+
+#### Kontrollér selskabets opsætning i e-conomic
+
+For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have disse oplysninger:
+
+1. En kunde (klient/patient)
+2. En kundegruppe, hvis kunden er ny
+3. En momszone, hvis kunden er ny
+4. Et eller flere varenumre (produkter/ydelser)
+5. En eller flere varegrupper, hvis et eller flere varenumre er nye
+6. En betalingsbetingelse af typen med forfaldsdato
+7. Et layout
+
+Det sker ved at:
+
+- For hver faktura, der skal eksporteres, vil **NovaXport** forsøge at finde kunden, først via CVR-nummeret for erhvervskunder, dernæst via navnet. Findes ikke et eksakt match, oprettes kunden og knyttes til den første indenlandske kundegruppe og den første indenlandske momszone, der er oprettet i e-conomic
+- Nye varenumre knyttes til varegruppe 1 i e-conomic
+- Hvis en betalingsbetingelse med forfaldsdato ikke findes i e-conomic, oprettes den med navnet "Standard"
+- Som layout bruges det første, der kan findes i e-conomic
+
+> Hvis ikke dette flow kan følges, kan fakturaen ikke bogføres, og den kan måske heller ikke oprettes som en kladde. I begge tilfælde vil **NovaXport** rapportere en fejl i loggen.
+
+Er de ovennævnte punkter på plads, vil e-conomic nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
 Næste trin er at muliggøre dette for **NovaXport**.
 
