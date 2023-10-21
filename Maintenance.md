@@ -34,7 +34,7 @@ Når **NovaXport** kører planmæssigt, sker følgende ved hver kørsel:
 
 Hver kørsel logges i maskinens *Logbog* under *Windows-logger/Program* med NovaXport angivet som *Kilde*.
 
-Der vil typisk være disse hændelser (*Dato/tid* og *Kilde* er udeladt), her vist for to fakturaer:
+Der vil typisk være disse hændelser (kolonnerne *Dato/tid* og *Kilde* er udeladt), her vist for to fakturaer:
 
 | Niveau      | Hændelses-id | Generelt                                                    |
 | :---------- | -----------: | :---------------------------------------------------------- |
@@ -119,9 +119,9 @@ Eksporterede fakturaer vil være bogført i e-conomic. De kan derfor ses under *
 
 ### Fjern tilknytning af server eller selskab
 
-> Data bør ikke slettes fra databasen og slet ikke uden først at have oprettet en sikkerhedskopi.
+> NB: Data bør ikke slettes fra databasen og slet ikke uden først at have oprettet en sikkerhedskopi.
 
-Skal en server eller et selskab af den ene eller anden grund ikke længere håndteres af **NovaXport**, gøres det nemmest ved _deaktivere_ den.
+Skal en server eller et selskab af den ene eller anden grund ikke længere håndteres af **NovaXport**, gøres det nemmest ved _deaktivere_ den/det.
 
 #### Deaktivér server
 
