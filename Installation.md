@@ -260,7 +260,7 @@ Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Co
 
 #### Log
 
-Det medfølgende program _Nirsoft FullEventLogView_ er til visning af _Windows logbog_, som **NovaXport** skriver til.
+Det medfølgende program _Nirsoft FullEventLogView_ er til visning af _Windows logbog_, som **NovaXport** skriver til ved hver kørsel.
 
 Det er et selvstændigt program, som ikke kræver installation, men bør åbnes direkte med genvejen _NovaXport Log_, som er omtalt ovenfor.
 
