@@ -117,6 +117,39 @@ Eksporterede fakturaer vil være bogført i e-conomic. De kan derfor ses under *
 - [Tilføj server][Configuration server]
 
 
+### Fjern tilknytning af server eller selskab
+
+> Data bør ikke slettes fra databasen og slet ikke uden først at have oprettet en sikkerhedskopi.
+
+Skal en server eller et selskab af den ene eller anden grund ikke længere håndteres af **NovaXport**, gøres det nemmest ved _deaktivere_ den.
+
+#### Deaktivér server
+
+- Åbn **NovaXport**s database med genvejen _NovaXport Database_
+- I kombinationsboksen _Table_ vælg _Server_
+- Vælg den server, der skal deaktiveres
+- Indtast i feltet _Inactive_ til højre: **1**
+- Klik øverst på _Write Changes_
+- Luk vinduet
+
+Herefter vil **NovaXport** ignorere serveren ved kommende kørsler.
+
+Serveren kan genaktiveres på tilsvarende måde ved at indtaste **0** i stedet for **1**.
+
+#### Deaktivér selskab
+
+- Åbn **NovaXport**s database med genvejen _NovaXport Database_
+- I kombinationsboksen _Table_ vælg _Company_
+- Vælg det selskab, der skal deaktiveres
+- Indtast i feltet _Inactive_ til højre: **1**
+- Klik øverst på _Write Changes_
+- Luk vinduet
+
+Herefter vil **NovaXport** ignorere selskabet ved kommende kørsler.
+
+Selskabet kan genaktiveres på tilsvarende måde ved at indtaste **0** i stedet for **1**.
+
+
 ### Sikkerhedskopiering
 
 Der er to datafiler at sikkerhedskopiere. De ligger begge i mappen `%ProgramData%\Novax Export`:
@@ -179,6 +212,6 @@ Pkt. 3. og 4. må udføres manuelt.
 [Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
 [Main page]: https://cactusdata.github.io/NovaXport/
 [Configuration]: https://cactusdata.github.io/NovaXport/Configuration
-[Configuration company]: https://cactusdata.github.io/NovaXport/Configuration#Tilføj-selskab-klinik
-[Configuration server]: https://cactusdata.github.io/NovaXport/Configuration#Tilføj-selskab
+[Configuration company]: https://cactusdata.github.io/NovaXport/Configuration#tilf%C3%B8j-selskab-klinik
+[Configuration server]: https://cactusdata.github.io/NovaXport/Configuration#tilf%C3%B8j-server
 [Main page]: https://cactusdata.github.io/NovaXport/
