@@ -89,7 +89,7 @@ som typisk vil være disse fysiske mapper:
 
 Det kan gøres enten manuelt med _Stifinder_ eller fx ved at åbne et Terminal-vindue i mappen og kalde kommandofilen således:
 
-    .\NovaXport_Unpack.cmd
+    .\NovaXport_Unpack
 
 Herefter skal der som minimum være disse filer i mapperne:
 
