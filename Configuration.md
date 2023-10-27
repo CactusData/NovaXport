@@ -38,6 +38,8 @@ Filen `Credentials.xml` indeholder brugernavn og adgangskode for brugerkontoen, 
 
 Det er en standard XML-fil, der kan redigeres med fx _Notesblok_, og det gøres nemmest ved at bruge _genvejen_ `NovaXport Credentials` omtalt under [Installation][Installation]. 
 
+> NB: Filen er låst og kan ikke ændres, mens **NovaXport** kører. Så skal den ændres, skal **NovaXport** stoppes, ændringerne udføres og gemmes, og **NovaXport** startes igen.
+
 Filen ser således ud:
 
 ```xml

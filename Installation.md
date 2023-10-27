@@ -124,7 +124,7 @@ Desuden er der undermapper med hjælpeprogrammer til visning af databasen og log
 
   > TIP: Genvejene kan også kaldes med _PowerShell_ fx under _Windows Server Core Edition_, blot skal det fulde filnavn angives, fx:
   >
-  > `cmd /r "NovaXport Service Prompt.lnk"`
+  > `start "NovaXport Service Prompt.lnk"`
 
 #### Tjenesten
 
@@ -265,7 +265,7 @@ Endelig skal `DB Browser (SQLite)` installeres, da den skal bruges til at opsæt
 
 Installationsfilen hertil, `DB.Browser.for.SQLite` ligger i undermappen `SQLiteBrowser`.
 
-installationen kan gennemføres med standardindstillinger og -valg. Herefter kan genvejen `NovaXport Database` (se ovenfor) bruges til at åbne **NovaXport**s database direkte.
+Installationen kan gennemføres med standardindstillinger og -valg. Herefter kan genvejen `NovaXport Database` (se ovenfor) bruges til at åbne **NovaXport**s database direkte.
 
 Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Company*, og de øvrige tabeller kan man uden videre vælge også at få vist:
 

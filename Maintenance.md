@@ -157,7 +157,9 @@ Der er to datafiler at sikkerhedskopiere. De ligger begge i mappen `%ProgramData
 - `Credentials.xml`
 - `NovaxData.db`
 
-De vil normalt kun være åbnet i få sekunder af gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
+Den første er låst, mens **NovaXport** kører, men ændres ikke, så efter installation og konfiguration kan der blot gemmes en kopi af den et passende sted.
+
+Dene anden vil normalt kun være åbnet i få sekunder af gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
 
 **NovaXPort** selv behøver ikke at sikkerhedskopieres, da den nemt installeres igen, i fald Windows skal retableres eller maskinen udskiftes.
 
