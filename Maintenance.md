@@ -175,6 +175,8 @@ Brug evt. kommandofilerne:
   - `NovaXport_Stop.cmd`
   - `NovaXport_Start.cmd`
 
+til hhv. pkt 1. og 3.
+
 
 ### Sletning af NovaXport
 

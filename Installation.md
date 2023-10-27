@@ -56,7 +56,7 @@ Der er ingen særlige krav til maskinen, der skal afvikle **NovaXport**, ud over
 #### Krav til Windows-version
 
 - minimum: Windows 10 Pro (64-bit)
-- anbefalet: Windows Server 2022 eller senere
+- anbefalet: Windows Server 2022 eller senere, *Core* edition eller *Desktop* edition
 
 Opdatering, sikkerhedskopiering og vedligeholdelse bør som minimum følge samme procedurer som for klinikkens øvrige maskiner.
 
@@ -65,9 +65,16 @@ Opdatering, sikkerhedskopiering og vedligeholdelse bør som minimum følge samme
 
 #### Filer
 
-Der er ikke nogen installationsrutine til **NovaXport**. De nødvendig filer leveres i en zip-fil, som indeholder disse to mapper:
+Der er ikke nogen installationsrutine til **NovaXport**. De nødvendig filer leveres i en zip-fil og en kommandofil, der kan bruges til at pakke den zip-filen ud:
 
-- ProgramFiles
+- `NovaXport.zip`
+- `NovaXport_Unpack.cmd`
+
+De kan med fordel kopieres til brugernes fællesmappe _Delte filer_ (typisk _C:\Users\Public_).
+
+Zip-filen indeholder disse to mapper:
+
+- Program Files
 - ProgramData
 
 Efter login på maskinen med en administratorkonto kan filerne herfra kopieres ind i de tilsvarende Windows systemmapper:
@@ -79,6 +86,10 @@ som typisk vil være disse fysiske mapper:
 
 - `C:\Program Files`
 - `C:\ProgramData`
+
+Det kan gøres enten manuelt med _Stifinder_ eller fx ved at åbne et Terminal-vindue i mappen og kalde kommandofilen således:
+
+    .\NovaXport_Unpack.cmd
 
 Herefter skal der som minimum være disse filer i mapperne:
 
@@ -109,8 +120,11 @@ Desuden er der undermapper med hjælpeprogrammer til visning af databasen og log
 
   Brugen af disse omtales under [Konfiguration][Configuration] og [Kontrol og vedligeholdelse][Maintenance].
 
-
   Genvejene fra undermappen `Desktop Shortcuts` kan med fordel kopieres til _Skrivebord_, da man så har stort set alt for hånden til pasning af **NovaXport**.
+
+  > TIP: Genvejene kan også kaldes med _PowerShell_ fx under _Windows Server Core Edition_, blot skal det fulde filnavn angives, fx:
+  >
+  > `cmd /r "NovaXport Service Prompt.lnk"`
 
 #### Tjenesten
 
