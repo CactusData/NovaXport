@@ -34,7 +34,7 @@ For at give **NovaXport** adgang til serveren, er der tre muligheder:
 
 Ingen af de tre muligheder kan realiseres uden en aftale med NOVAX.
 
-Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem klinkkens IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under klinikkens kontrol og administration sættes op, og **NovaXport** installeres på den.
+Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem klinikkens IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under klinikkens kontrol og administration sættes op, og **NovaXport** installeres på den.
 
 #### VPN-forbindelse
 
