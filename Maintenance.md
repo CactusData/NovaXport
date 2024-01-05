@@ -42,20 +42,24 @@ Der vil typisk være disse hændelser (kolonnerne *Dato/tid* og *Kilde* er udela
 | Oplysninger | 2970         | Dato/tid - Læser selskab 11223344 faktura 123456: OK.       |
 | Oplysninger | 2970         | Dato/tid - Læser selskab 11223344 faktura 123457: OK.       |
 | Oplysninger | 2961         | Dato/tid - Læser slut.                                      |
-| Oplysninger | 2980         | Dato/tid - Eksporterer start.                               |
-| Oplysninger | 2990         | Dato/tid - Eksporterer selskab 11223344 faktura 123456: OK. |
-| Oplysninger | 2990         | Dato/tid - Eksporterer selskab 11223344 faktura 123457: OK. |
-| Oplysninger | 2981         | Dato/tid - Eksporterer slut.                                |
+| Oplysninger | 2962         | Dato/tid - Eksporterer start.                               |
+| Oplysninger | 2980         | Dato/tid - Eksporterer selskab 11223344 faktura 123456: OK. |
+| Oplysninger | 2980         | Dato/tid - Eksporterer selskab 11223344 faktura 123457: OK. |
+| Oplysninger | 2963         | Dato/tid - Eksporterer slut.                                |
+| Oplysninger | 2964         | Dato/tid - Søger manglende start.                           |
+| Oplysninger | 2990         | Dato/tid - Søger selskab 11223344 faktura 123454: Mangler.  |
+| Oplysninger | 2965         | Dato/tid - Søger manglende slut.                            |
+| Oplysninger | 2966         | Dato/tid - Fakturamangelliste sendt: OK.                    |
 | Oplysninger | 2950         | Dato/tid - Pause i 15 minutter.                             |
 
 Hvis *Læsning* og/eller *Eksport* skulle fejle, logges følgende for Hændelses-id 2970 hhv. 2990:
 
 | Niveau      | Hændelses-id | Generelt                                                      |
 | :---------- | -----------: | :------------------------------------------------------------ |
-| Advarsel    | 2970         | Dato/tid - Læser selskab 11223344 faktura 123456: Fejl.       |
-| Advarsel    | 2990         | Dato/tid - Eksporterer selskab 11223344 faktura 123456: Fejl. |
+| Advarsel    | 2979         | Dato/tid - Læser selskab 11223344 faktura 123456: Fejl.       |
+| Advarsel    | 2989         | Dato/tid - Eksporterer selskab 11223344 faktura 123456: Fejl. |
 
-Årsagen hertil må naturligvis undersøges.
+Årsagen hertil må naturligvis undersøges. Den typiske fejlkilde er manglende adgang eller rettigheder til enten filserveren eller e-conomic.
 
 
 #### 2. Serverne
@@ -89,7 +93,7 @@ eller for en kreditnota:
 
 hvor det første tal er fakturanummeret, og det andet er CVR-nummeret.
 
-Feltet *FileDate* er fildatoen, som kan være en anden end fakturadatoen.
+Feltet *FileDate* er fildatoen, som kan være en anden end fakturadatoen. Det gælder især for en faktura, der genudskrives i Novax-systemet, hvor fildatoen da vil være dags dato.
 
 Sidste felt er eksportdatoen, *ExportedAt*. Den kan have én af disse tre mulige værdier:
 
@@ -104,9 +108,18 @@ Den første er den normale. De to næste bør man undersøge årsagen til.
 > Hvis en faktura ikke er eksporteret og af en eller anden grund heller ikke skal, skrives en dato (fx fakturadatoen) ind i feltet *ExportedAt*. **NovaXport** tror så, at den er faktureret og vil ignorere den fremover.
 
 
-#### 4. e-conomic
+#### 4. E-conomic
 
 Eksporterede fakturaer vil være bogført i e-conomic. De kan derfor ses under *Salg/Arkiv* og følges under *Indstillinger/Log* på sædvanlig måde.
+
+
+#### 5. Fakturamangelliste
+
+Listen med tilsyneladende manglende fakturafiler udsendes dagligt. Modtagerne står opført i tabellen *Recipient* i databasen. Listen kan ændres efter behov:
+
+Åbn databasen med databasemanageren og vælg tabellen *Recipient* i kombinationsfeltet *Table* og tilret listen.
+
+En modtager kan sættes på pause ved at ændre værdien i felt *Inactive* til **1**. Pausen afsluttes ved at ændre værdien tilbage til **0**. Er pausen permanent, kan man i stedet slette hele posten. 
 
 
 ### Tilknytning af ekstra server eller selskab
@@ -161,12 +174,12 @@ Den første er låst, mens **NovaXport** kører, men ændres ikke, så efter ins
 
 Dene anden vil normalt kun være åbnet i få sekunder af gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
 
-**NovaXPort** selv behøver ikke at sikkerhedskopieres, da den nemt installeres igen, i fald Windows skal retableres eller maskinen udskiftes.
+**NovaXPort** selv behøver ikke at sikkerhedskopieres, da den nemt kan installeres igen, i fald Windows skal retableres, eller maskinen udskiftes.
 
 
 ### Opdatering af NovaXport
 
-Hvis en ny version skal installeres, gøres følgende:
+Hvis en ny version skal tages i brug, gøres følgende:
 
 1. Stop tjenesten
 2. Kopiér den nye fil, `NovaXport.exe`, til mappen `%ProgramFiles%\Novax Export`

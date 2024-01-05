@@ -30,7 +30,7 @@ Efter en tidsplan, som i flere intervaller kan justeres fra ét minut til mange 
 - opdaterer sin egen fakturaliste, som gemmes i en lokal database
 - logger ud af serveren
 
-Dette forløb gentages for hver yderligere server, hvis flere klinikker håndteres.
+Dette forløb gentages for hver yderligere server, hvis flere klinikker håndteres fordelt på flere servere.
 
 Dernæst eksporteres de fakturaer, der ikke allerede er eksporteret:
 
@@ -42,12 +42,21 @@ Dernæst eksporteres de fakturaer, der ikke allerede er eksporteret:
 - fortsætter med at læse, eksportere og bogføre fakturaer, indtil der ikke er flere
 - logger ud af filserveren
 
-Dette forløb gentages for hver yderligere server, hvis flere klinikker håndteres.
+Dette forløb gentages for hver yderligere server, hvis flere klinikker håndteres fordelt på flere servere.
 
 Til sidst:
 
+- sender efter dagens første kørsel en e-mail til bogholderiet med en liste over tilsyneladende manglende fakturafiler
+
+> Manglende fakturafiler defineres som "huller" i fakturanummerserien. Findes fx faktura 110, 111 og 113, anses faktura 112 som manglende.
+>
+> Manglende fakturafiler skyldes som regel, at der hverken er angivet EAN/GLN- eller CVR-nummer på kunden, og en elektronisk faktura er derfor ikke blevet oprettet. Det korrigeres ved, at man i Novax-systemet føjer et af disse numre til kunden og vælger udskrivning af fakturaen til "økonomifil". Herefter vil NovaXport ved næste kørsel eksportere fakturaen på normal vis.
+
+Til allersidst:
+
 - logger forløbet i Windows Logbog
 - holder pause til næste kørsel
+
 
 De eksporterede fakturaer vil i e-conomic kunne ses på sædvanlig måde, dels i Arkiv under Salg, dels i loggen.
 

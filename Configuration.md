@@ -235,9 +235,41 @@ Standardtidsplanen ser således ud:
 ![Tidsplan][New schedule]
 
 
+### Tilføj modtagere af fakturamangellisten
+
+Efter dagens første kørsel kan **NovaXport** udsende en e-mail en liste over tilsyneladende manglende filer. Modtagerne skrives ind i databasen:
+
+Åbn databasen med databasemanageren og vælg tabellen *Recipient* i kombinationsfeltet *Table*.
+
+Den har disse felter:
+
+| Felt      | Indhold         | Udfyldes | Indtastes            |
+| :-------- | :-------------- | :------- | :------------------- |
+| Id        | Løbenummer      | Nej      | Ingenting            |
+| Name      | Modtagernavn    | Valgfri  | Tekst                |
+| Email     | Modtageradresse | Ja       | E-mailadresse        |
+| Inactive  | 0 eller 1       | Ja       | 0 for aktiv modtager |
+
+Indtast de ønskede modtageres e-mailadresser. Navn er valgfrit, men anbefalet om ikke andet så fordi, det er nemmere at identificere modtagerne, når modtagerlisten skal justeres.
+
+En modtager kan sættes på pause ved at ændre værdien i felt *Inactive* til **1** som vist her: 
+
+![Modtagere][New recipient]
+
+Pausen afsluttes ved at ændre værdien tilbage til **0**.
+
+Er pausen permanent, kan man i stedet slette hele posten.
+
+Afsenderen vil altid være: `Novax Eksport <novaxport@cactusdata.dk>`
+
+Den modtagne e-mail vil ligne denne:
+
+![Liste med manglende fakturaer][Missing invoice list email]
+
+
 ### Start NovaXport
 
-Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* eller med kommandofilen `NovaXport_Start.cmd` som beskrevet i afsnit [Installation][Installation]. Administratorrettigheder kræves for begge muligheder.
+Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* eller med kommandofilen `NovaXport_Start.cmd` som beskrevet i afsnit [Installation][Installation]. Administratorrettigheder kræves i begge tilfælde.
 
 <hr>
 
@@ -252,6 +284,8 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 [New company]: images/NewCompany.png
 [New server]: images/NewServer.png
 [New schedule]: images/NewSchedule.png
+[New recipient]: images/NewRecipient.png
+[Missing invoice list email]: images/MissingInvoices.png
 [Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201
