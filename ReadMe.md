@@ -79,6 +79,7 @@ Kontakt [Cactus Data](mailto:Cactus%20Data%20<cactus@cactus.dk>?subject=NovaXpor
 For hjælp til **NovaXport**, kontakt [Cactus Data Service](mailto:Cactus%20Data%20Service%20<service@cactus.dk>?subject=NovaXport).
 
 ![Cactus Data ApS][Cactus Data logo]
+
 <hr>
 
 

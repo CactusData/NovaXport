@@ -91,7 +91,7 @@ eller for en kreditnota:
 
 `Novax_12345678_11223344_Kreditnote.xml`
 
-hvor det første tal er fakturanummeret, og det andet er CVR-nummeret.
+hvor det første tal er fakturanummeret, og det andet er CVR-nummeret på selskabet, klinikken er knyttet til.
 
 Feltet *FileDate* er fildatoen, som kan være en anden end fakturadatoen. Det gælder især for en faktura, der genudskrives i Novax-systemet, hvor fildatoen da vil være dags dato.
 
@@ -117,7 +117,7 @@ Eksporterede fakturaer vil være bogført i e-conomic. De kan derfor ses under *
 
 Listen med tilsyneladende manglende fakturafiler udsendes dagligt. Modtagerne står opført i tabellen *Recipient* i databasen. Listen kan ændres efter behov:
 
-Åbn databasen med databasemanageren og vælg tabellen *Recipient* i kombinationsfeltet *Table* og tilret listen.
+- Åbn databasen med databasemanageren og vælg tabellen *Recipient* i kombinationsfeltet *Table* og tilret listen.
 
 En modtager kan sættes på pause ved at ændre værdien i felt *Inactive* til **1**. Pausen afsluttes ved at ændre værdien tilbage til **0**. Er pausen permanent, kan man i stedet slette hele posten. 
 
@@ -172,9 +172,9 @@ Der er to datafiler at sikkerhedskopiere. De ligger begge i mappen `%ProgramData
 
 Den første er låst, mens **NovaXport** kører, men ændres ikke, så efter installation og konfiguration kan der blot gemmes en kopi af den et passende sted.
 
-Dene anden vil normalt kun være åbnet i få sekunder af gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
+Dene anden vil normalt kun være åbnet i få sekunder ad gangen, så enhver gængs metode til sikkerhedskopiering kan benyttes.
 
-**NovaXPort** selv behøver ikke at sikkerhedskopieres, da den nemt kan installeres igen, i fald Windows skal retableres, eller maskinen udskiftes.
+**NovaXport** programfilerne behøver ikke at sikkerhedskopieres, da de nemt kan installeres igen, i fald Windows skal retableres, eller maskinen udskiftes.
 
 
 ### Opdatering af NovaXport

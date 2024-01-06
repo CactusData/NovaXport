@@ -18,14 +18,14 @@ Her findes to datafiler:
 - `Credentials.xml`
 - `NovaxData.db`
 
-Den første indeholder brugernavn og adgangskode til NOVAX-serverne og mailserveren.
+Den første indeholder brugernavn og adgangskode til NOVAX-serverne og nøgler til mailserveren.
 
 Den anden, databasen, indeholder *fem lister*, der styrer den daglige funktion af **NovaXport**:
 
 1. Serverne, der skal læses fakturaer fra - minimum én
 2. Selskaberne hos e-conomic, der skal eksporteres fakturaer til - minimum ét
-3. Fakturaerne (numre og dato) og deres status
-4. Ugetidsplan for hvornår og hvor tit, **NovaXport** skal genlæse fakturalisten på serveren
+3. Fakturaerne (numre og udskrivningsdato) og deres status
+4. Ugetidsplan for hvornår og hvor tit, **NovaXport** skal genlæse fakturalisten på serverne
 5. Modtagerne af den daglige e-mail med listen over eventuelle manglende fakturafiler
 
 
@@ -35,7 +35,7 @@ Filen `Credentials.xml` indeholder brugernavn og adgangskode for brugerkontoen, 
 
 > Det anbefales kraftigt ikke at bruge en normal brugerkonto, men at oprette en speciel brugerkonto, der kun bruges af **NovaXport**, kun med læseadgang til den delte mappe.
 >
-> Dette skal gøres af NOVAX, da de administrerer serveren. Det aktuelle brugernavn og tilhørende adgangskode skal derfor aftales med NOVAX og skal være kendt af NOVAX' support.
+> Dette skal gøres af NOVAX, da de administrerer serverne. Det aktuelle brugernavn og tilhørende adgangskode skal derfor aftales med NOVAX og skal være kendt af NOVAX' support.
 
 Det er en standard XML-fil, der kan redigeres med fx _Notesblok_, og det gøres nemmest ved at bruge _genvejen_ `NovaXport Credentials` omtalt under [Installation][Installation]. 
 
@@ -50,12 +50,12 @@ Filen ser således ud:
     <Username>NovaxEksport</Username>
     <Password>VoresMegetLangeAdgangskode</Password>
     <AppSecretToken>2RIukREatPIvuN92ry89My1cazJtx3LUX9bFsCMVBA81</AppSecretToken>
-	<MailjetPublicToken>8d50a951512e1d9f051efbd1f336b55b</MailjetPublicToken>
-	<MailjetPrivateToken>28849ccda2b3c50790f580aedf7d50fe</MailjetPrivateToken>
+    <MailjetPublicToken>8d50a951512e1d9f051efbd1f336b55b</MailjetPublicToken>
+    <MailjetPrivateToken>28849ccda2b3c50790f580aedf7d50fe</MailjetPrivateToken>
 </ReaderAccount>
 ```
 
-Adgangen til den delte mappe på serveren styres af de tre felter:
+Adgangen til de delte mapper på serverne styres af de tre felter:
 
 - `Domain`
 - `Username`
@@ -74,16 +74,18 @@ De to sidste felter:
 - `MailjetPublicToken`
 - `MailjetPrivateToken`
 
-er nøglerne til e-mailtjenesten hos MailJet, der bruges til at udsende listen med manglende fakturaer. De må ikke ændres eller slettes.
+er nøglerne til e-mailtjenesten hos Mailjet, der bruges til at udsende listen med manglende fakturaer. De må ikke ændres eller slettes.
 
 
 ### Tilføj selskab (klinik)
 
-For at NovaXport kan sende fakturaer til e-conomic, skal to ting være på plads.
+For at NovaXport kan sende fakturaer til et selskab i e-conomic, skal tre ting være på plads:
 
-For det første skal "e-conomic appen NovaXport" *tilknyttes selskabet* ved at blive tilføjet listen over apps, som selskabet kan kommunikere med. Det skal gøre inde i e-conomic.
+1. For det første skal i e-conomic appen "NovaXport" *tilknyttes selskabet* ved at blive tilføjet listen over apps, som selskabet kan kommunikere med. Det skal gøre inde i e-conomic
 
-Dernæst skal selskabet i **NovaXPort**s database *tilføjes listen over selskaber*, der kan eksporteres fakturaer til.
+2. Dernæst skal nogle grupper og eventuelt afdelinger *oprettes* i e-conomic
+
+3. Endelig skal selskabet i **NovaXPort**s database *tilføjes listen over selskaber*, der kan eksporteres fakturaer til
 
 Når appen (NovaXport) tilføjes i e-conomic, generes en *unik nøgle* (Adgangs-ID/token), som identificerer de to over for hinanden. Med dette Adgangs-ID:
 
@@ -91,19 +93,19 @@ Når appen (NovaXport) tilføjes i e-conomic, generes en *unik nøgle* (Adgangs-
 - fortæller **NovaXport**, når den kontakter e-conomic, hvilket selskab der skal kommunikeres med 
 
 
-#### Tilknyt app i e-conomic
+#### 1. Tilknyt app i e-conomic
 
-Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighed.
+Du skal have en *superbruger/administrator*-brugerkonto til e-conomic til rådighed.
 
 1. Log ind med denne brugerkonto på [Visma Home][Visma home]
-3. Hvis I har flere selskaber, så vælg det, der skal eksporteres til fra NOVAX
-4. Vælg fra topmenuen *Indstillinger* punktet *Alle indstillinger*
-5. Vælg i menuen til venstre punktet *Apps*
-6. Nu vises enten en liste med de apps, der tidligere er aktiveret, eller denne side: *Sådan tilføjer du apps*
+2. Hvis I har flere selskaber, så vælg det, der skal eksporteres til fra NOVAX
+3. Vælg fra topmenuen *Indstillinger* punktet *Alle indstillinger*
+4. Vælg i menuen til venstre punktet *Apps*
+5. Nu vises enten en liste med de apps, der tidligere er aktiveret, eller denne side: *Sådan tilføjer du apps*
 
-7.  1. *Kopiér* nu [dette link][App link]
+6.  1. *Kopiér* nu [dette link][App link]
     2. Åbn en ny side i browseren
-    3. *Indsæt* derefter linket (kopieret i pkt. 1) i den nye side og tryk *Enter*
+    3. *Indsæt* derefter linket (kopieret ovenfor) browserens søgelinje (URL) og tryk *Enter*
     4. Denne side vises nu:
 
     <br>![Tilføj app][Attach app]<br>
@@ -124,11 +126,13 @@ Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighe
 Når dette er på plads, vil e-conomic nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
 
-#### Justér og kontrollér selskabets opsætning i e-conomic
+#### 2. Justér og kontrollér selskabets opsætning i e-conomic
 
 Før **NovaXport** kan eksportere fakturaer, skal følgende være oprettet:
 
 - Kundegruppe 100
+- Varegruppe 100
+- Afdeling 10000 (hvis afdelinger/dimensioner er i brug i e-conomic)
 
 For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have disse oplysninger:
 
@@ -140,20 +144,40 @@ For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have
 6. En betalingsbetingelse af typen med forfaldsdato
 7. Et layout
 
-Det sker ved at:
+Det sker på to forskellige måder afhængig af, om kunden er en privatperson eller er en myndighed eller en erhvervsvirksomhed
 
-- For hver faktura, der skal eksporteres, vil **NovaXport** forsøge at finde kunden, først via CVR-nummeret for erhvervskunder, dernæst via navnet. Findes ikke et eksakt match, oprettes kunden og knyttes til den første indenlandske kundegruppe og den første indenlandske momszone, der er oprettet i e-conomic
-- Nye varenumre knyttes til varegruppe 1 i e-conomic
+#### Erhverv og myndigheder
+
+Disse har altid et CVR- eller EAN-nummer og eksporteres således:
+
+- For hver faktura, der skal eksporteres, vil **NovaXport** forsøge at finde kunden, først via CVR-nummeret for erhvervskunder, dernæst via navnet. Findes ikke et eksakt match, oprettes kunden og knyttes til kundegruppe 100
+- Momszone og layout hentes fra kundens kundegruppe
+- Nye varenumre knyttes til varegruppe 100
 - Hvis en betalingsbetingelse med forfaldsdato ikke findes i e-conomic, oprettes den med navnet "Standard"
-- Som layout bruges det første, der kan findes i e-conomic
+- Kunden vil fremstå som adressat på fakturaudskriften
+- klientens/patientens CPR-nummer angives på fakturaen som en reference
 
-> Hvis ikke dette flow kan følges, kan fakturaen ikke bogføres, og den kan måske heller ikke oprettes som en kladde. I begge tilfælde vil **NovaXport** rapportere en fejl i loggen.
+#### Privatpersoner
+
+Disse har altid et CPR-nummer, men oprettes ikke som separate kunder. I stedet knyttes de til en "samlekunde" knyttet til kundegruppe 100. Denne samlekunde oprettes (automatisk) med klinikkens ydernummer som kundenummer, fx:
+
+`33221 Lægehuset Nyborg`
+
+Hvis flere klinikker er knyttet til det samme selskab, vil der derfor findes en samlekunde for hver klinik.
+
+Disse fakturaer eksporteres derfor således:
+
+- For hver faktura, der skal eksporteres, vil **NovaXport** finde klinikkens samlekunde ud fra ydernummeret
+- Momszone og layout hentes fra samlekundens kundegruppe
+- Nye varenumre knyttes til varegruppe 100
+- Hvis en betalingsbetingelse med forfaldsdato ikke findes i e-conomic, oprettes den med navnet "Standard"
+- Klienten/patienten vil fremstå som adressat på fakturaudskriften
+- klientens/patientens CPR-nummer angives på fakturaen som en reference
+
+> Hvis ikke et af disse to flows kan følges, kan fakturaen ikke bogføres, og den kan måske heller ikke oprettes som en kladde. I begge tilfælde vil **NovaXport** rapportere en fejl i loggen.
 
 
-Næste trin er at muliggøre dette for **NovaXport**.
-
-
-#### Tilknyt selskab i NovaXport
+#### 3. Tilknyt selskab i NovaXport
 
 Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under [Installation][Installation]), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
 
@@ -198,7 +222,7 @@ For hver server, **NovaXport** skal skanne og læse NOVAX-fakturaer fra, skal br
 
 Åbn databasen med databasemanageren og vælg tabellen *Server* i kombinationsfeltet *Table*.
 
-Gå til en ny post og indsæt i felterne *Hostname* og *ShareName* hhv. serverens *Hostname* og navnet på dens den *delte mappe* med fakturafilerne oprettet af NOVAX.
+Gå til en ny post og indsæt i felterne *Hostname* og *ShareName* hhv. serverens *Hostname* og navnet på den *delte mappe* med fakturafilerne oprettet af NOVAX.
 
 Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres. 
 
@@ -253,7 +277,7 @@ Standardtidsplanen ser således ud:
 
 ### Tilføj modtagere af fakturamangellisten
 
-Efter dagens første kørsel kan **NovaXport** udsende en e-mail en liste over tilsyneladende manglende filer. Modtagerne skrives ind i databasen:
+Efter dagens første kørsel kan **NovaXport** udsende en e-mail med en liste over tilsyneladende manglende filer. Modtagerne skrives ind i databasen:
 
 Åbn databasen med databasemanageren og vælg tabellen *Recipient* i kombinationsfeltet *Table*.
 

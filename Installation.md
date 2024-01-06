@@ -14,7 +14,6 @@ Kun NOVAX har administratorrettighed til serveren, der afvikler NOVAX-systemet. 
 Eksempler på den fysiske mappe på serveren, hvor fakturafilerne bliver gemt:
 - `F:\App8\Novax\Finans`
 - `F:\App8\Økonomifiler`
-- `F:\C5`
 
 ### E-conomic
 
@@ -94,7 +93,7 @@ som typisk vil være disse fysiske mapper:
 - `C:\Program Files`
 - `C:\ProgramData`
 
-Det kan gøres enten manuelt med _Stifinder_.
+Det kan gøres enten manuelt eller med _Stifinder_.
 
 #### 2. Halvautomatisk installation
 
@@ -105,7 +104,7 @@ Det kan gøres enten manuelt med _Stifinder_.
 
 #### Kontrol af installation
 
-Herefter skal der som minimum være disse filer i mapperne:
+Herefter skal der i de to mapper som minimum være disse fire filer:
 
 - `C:\Program Files\Novax Export`
   - `appsettings.json`
@@ -154,7 +153,7 @@ Desuden er der undermapper med hjælpeprogrammer til visning af databasen og log
 >
 > Derfor er der også (se ovenfor) inkluderet en *genvej*, `NovaXport Service Prompt`, der åbner `cmd.exe` med administratorrettigheder. Den kan umiddelbart kopieres til *Skrivebord*.
 
-*Den første* kommandofil er den kritiske, for det er den, der med gentagne kald af `sc.exe` registrerer `NovaXport.exe` som en tjeneste med den korrekte konfiguration. Den ser således ud:
+*Den første* kommandofil er den kritiske, for det er den, der ved gentagne kald af `sc.exe` registrerer `NovaXport.exe` som en tjeneste med den korrekte konfiguration. Den ser således ud:
 
 ```cmd
 : Command file for registering NovaXport as a service.
@@ -270,18 +269,18 @@ SERVICE_NAME: NovaXport
 Et tastetryk afslutter.
 ```
 
-På tilsvarende måde kan tjenesten stoppes, fjernes og få vist sin status.
+På tilsvarende måde kan tjenesten stoppes, fjernes eller få vist sin status.
 
 
 #### Database-manager
 
 Endelig skal `DB Browser (SQLite)` installeres, da den skal bruges til at opsætte **NovaXport**s database, vedligeholde den og justere **NovaXport**s funktion (se [Konfiguration][Configuration] og [Kontrol og vedligeholdelse][Maintenance]).
 
-Installationsfilen hertil, `DB.Browser.for.SQLite` ligger i undermappen `SQLiteBrowser`.
+Installationsfilen hertil, `DB.Browser.for.SQLite.msi` ligger i undermappen `SQLiteBrowser`.
 
 Installationen kan gennemføres med standardindstillinger og -valg. Herefter kan genvejen `NovaXport Database` (se ovenfor) bruges til at åbne **NovaXport**s database direkte.
 
-Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Company*, og de øvrige tabeller kan man uden videre vælge også at få vist:
+Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Company*, og de øvrige tabeller kan man uden videre vælge også at få vist ved at vælge dem i kombinationsboksen *Table*:
 
 ![NovaxData Company][Display table Company] 
 
@@ -308,6 +307,8 @@ URL'en ovenfor åbnes med Edge, og API'et skal straks svare:
 `Healthy`
 
 Kontakt Cactus Data, hvis det ikke er tilfældet, for **NovaXport** vil ikke eksportere fakturaer uden denne forbindelse.
+
+> **NB**: Hvis API'er er aktivt, men *ydernummeret ikke kan slås op*, anvendes et "standard" ydernummer: 10000
 
 <hr>
 
