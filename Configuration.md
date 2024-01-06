@@ -18,14 +18,15 @@ Her findes to datafiler:
 - `Credentials.xml`
 - `NovaxData.db`
 
-Den første indeholder brugernavn og adgangskode til NOVAX-serverne.
+Den første indeholder brugernavn og adgangskode til NOVAX-serverne og mailserveren.
 
-Den anden, databasen, indeholder *fire lister*, der styrer den daglige funktion af **NovaXport**:
+Den anden, databasen, indeholder *fem lister*, der styrer den daglige funktion af **NovaXport**:
 
 1. Serverne, der skal læses fakturaer fra - minimum én
 2. Selskaberne hos e-conomic, der skal eksporteres fakturaer til - minimum ét
 3. Fakturaerne (numre og dato) og deres status
 4. Ugetidsplan for hvornår og hvor tit, **NovaXport** skal genlæse fakturalisten på serveren
+5. Modtagerne af den daglige e-mail med listen over eventuelle manglende fakturafiler
 
 
 #### Adgang til servere og e-conomic
@@ -49,6 +50,8 @@ Filen ser således ud:
     <Username>NovaxEksport</Username>
     <Password>VoresMegetLangeAdgangskode</Password>
     <AppSecretToken>2RIukREatPIvuN92ry89My1cazJtx3LUX9bFsCMVBA81</AppSecretToken>
+	<MailjetPublicToken>8d50a951512e1d9f051efbd1f336b55b</MailjetPublicToken>
+	<MailjetPrivateToken>28849ccda2b3c50790f580aedf7d50fe</MailjetPrivateToken>
 </ReaderAccount>
 ```
 
@@ -65,6 +68,14 @@ Det fjerde felt:
 - `AppSecretToken`
 
 indeholder det token, **NovaXport** i sin egenskab af en "e-conomic app" er tildelt af e-conomic. Det er normalt allerede skrevet ind i filen og må ikke rettes eller slettes.
+
+De to sidste felter:
+
+- `MailjetPublicToken`
+- `MailjetPrivateToken`
+
+er nøglerne til e-mailtjenesten hos MailJet, der bruges til at udsende listen med manglende fakturaer. De må ikke ændres eller slettes.
+
 
 ### Tilføj selskab (klinik)
 
@@ -110,8 +121,14 @@ Du skal have en superbruger/administrator-brugerkonto til e-conomic til rådighe
 
 ![App-liste][App list]
 
+Når dette er på plads, vil e-conomic nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
-#### Kontrollér selskabets opsætning i e-conomic
+
+#### Justér og kontrollér selskabets opsætning i e-conomic
+
+Før **NovaXport** kan eksportere fakturaer, skal følgende være oprettet:
+
+- Kundegruppe 100
 
 For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have disse oplysninger:
 
@@ -132,7 +149,6 @@ Det sker ved at:
 
 > Hvis ikke dette flow kan følges, kan fakturaen ikke bogføres, og den kan måske heller ikke oprettes som en kladde. I begge tilfælde vil **NovaXport** rapportere en fejl i loggen.
 
-Er de ovennævnte punkter på plads, vil e-conomic nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
 
 Næste trin er at muliggøre dette for **NovaXport**.
 

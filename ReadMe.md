@@ -63,7 +63,7 @@ De eksporterede fakturaer vil i e-conomic kunne ses på sædvanlig måde, dels i
 > Bemærk, at fakturaerne, som i de fleste tilfælde vil indeholde personfølsomme oplysninger, kun læses og eksporteres. De gemmes på intet tidspunkt på maskinen, der afvikler tjenesten. Kun fakturanummer og -dato og selskabet, fakturaerne hører til, opbevares i fakturalisten.
 
 
-## Supplerende artikler
+## Supplerende information
 
 De nærmere detaljer i installation, konfiguration mv. af **NovaXport** findes her:
 
@@ -72,11 +72,11 @@ De nærmere detaljer i installation, konfiguration mv. af **NovaXport** findes h
 - [Kontrol og vedligeholdelse][Maintenance]
 
 
-## Information og support
+## Information og hjælp
 
-Kontakt [Cactus Data](mailto:cactus@cactus.dk?subject=NovaXport) for yderligere information om **NovaXport**.
+Kontakt [Cactus Data](mailto:Cactus%20Data%20<cactus@cactus.dk>?subject=NovaXport) for yderligere information om **NovaXport**.
 
-For hjælp til **NovaXport**, kontakt service@cactus.dk.
+For hjælp til **NovaXport**, kontakt [Cactus Data Service](mailto:Cactus%20Data%20Service%20<service@cactus.dk>?subject=NovaXport).
 
 ![Cactus Data ApS][Cactus Data logo]
 <hr>

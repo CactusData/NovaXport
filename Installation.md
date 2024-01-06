@@ -36,6 +36,9 @@ Ingen af de tre muligheder kan realiseres uden en aftale med NOVAX.
 
 Den første mulighed kan være kostbar. Den sidste vil NOVAX formentlig ikke tillade, fordi de har ansvaret for maskinens drift. Den nemmeste og mest sandsynlige mulighed er derfor VPN-forbindelsen, som kan etableres ved en aftale mellem klinikkens IT-folk og NOVAX. Når den er oprettet, kan en Windows-maskine under klinikkens kontrol og administration sættes op, og **NovaXport** installeres på den.
 
+En fjerde mulighed er, at klinikkens lokalnet allerede er forbundet til NOVAX' hosting-net. I så fald skal maskinen blot forbindes til lokalnettet på samme måde som klinikkens øvrige maskiner.
+
+
 #### VPN-forbindelse
 
 Vælges denne løsning, skal **SMBv3**-protokollen kunne passere firewallen. Derfor skal denne port være åben:
@@ -46,7 +49,7 @@ TCP 445
 
 ### Maskine
 
-Der er ingen særlige krav til maskinen, der skal afvikle **NovaXport**, ud over hvad Windows kræver. Da maskinen i det daglige vil passe sig selv, kan følgende krav formuleres:
+Der er ingen særlige krav til maskinen, der skal afvikle **NovaXport** ud over, hvad Windows kræver. Da maskinen i det daglige vil passe sig selv, kan følgende krav formuleres:
 
 #### Krav til maskine
 
@@ -65,12 +68,16 @@ Opdatering, sikkerhedskopiering og vedligeholdelse bør som minimum følge samme
 
 #### Filer
 
-Der er ikke nogen installationsrutine til **NovaXport**. De nødvendig filer leveres i en zip-fil og en kommandofil, der kan bruges til at pakke den zip-filen ud:
+Der er ikke nogen installationsrutine til **NovaXport**. De nødvendig filer leveres i en zip-fil og en kommandofil, der kan bruges til at pakke zip-filen ud:
 
 - `NovaXport.zip`
 - `NovaXport_Unpack.cmd`
 
 De kan med fordel kopieres til brugernes fællesmappe _Delte filer_ (typisk _C:\Users\Public_).
+
+Herefter kan filerne installeres enten manuelt eller halvautomatisk:
+
+#### 1. Manuel installation
 
 Zip-filen indeholder disse to mapper:
 
@@ -87,9 +94,16 @@ som typisk vil være disse fysiske mapper:
 - `C:\Program Files`
 - `C:\ProgramData`
 
-Det kan gøres enten manuelt med _Stifinder_ eller fx ved at åbne et Terminal-vindue i mappen og kalde kommandofilen således:
+Det kan gøres enten manuelt med _Stifinder_.
+
+#### 2. Halvautomatisk installation
+
+Åbn med administratorrettigheder et Terminal-vindue i mappen med filerne og kald kommandofilen således:
 
     .\NovaXport_Unpack
+
+
+#### Kontrol af installation
 
 Herefter skal der som minimum være disse filer i mapperne:
 
@@ -140,7 +154,7 @@ Desuden er der undermapper med hjælpeprogrammer til visning af databasen og log
 >
 > Derfor er der også (se ovenfor) inkluderet en *genvej*, `NovaXport Service Prompt`, der åbner `cmd.exe` med administratorrettigheder. Den kan umiddelbart kopieres til *Skrivebord*.
 
-*Den første* kommandofil er den kritiske, for det er den, der ved gentagne kald af `sc.exe` bruges til at registrere `NovaXport.exe` som en tjeneste med den korrekte konfiguration. Den ser således ud:
+*Den første* kommandofil er den kritiske, for det er den, der med gentagne kald af `sc.exe` registrerer `NovaXport.exe` som en tjeneste med den korrekte konfiguration. Den ser således ud:
 
 ```cmd
 : Command file for registering NovaXport as a service.
@@ -277,6 +291,23 @@ Bruger man genvejen, åbnes *DB Browser for SQLite* straks og viser tabellen *Co
 Det medfølgende program _Nirsoft FullEventLogView_ er til visning af _Windows logbog_, som **NovaXport** skriver til ved hver kørsel.
 
 Det er et selvstændigt program, som ikke kræver installation, men bør åbnes direkte med genvejen _NovaXport Log_, som er omtalt ovenfor.
+
+
+#### API for ydernumre
+
+Fakturafilerne oprettet af NOVAX-systemet indeholder klinikkens EAN/GLN-nummer, men *ikke klinikkens ydernummer*, som normalt kræves oplyst på fakturaen.
+
+Før eksport til e-conomic skal ydernummeret, der hører til EAN-nummeret, derfor først findes, og det sker ved at kald til dette API:
+
+`https://api.cactusdata.dk`
+
+Det er nemt at kontrollere, at API'et er aktivt, og at computeren har adgang til det: 
+
+URL'en ovenfor åbnes med Edge, og API'et skal straks svare:
+
+`Healthy`
+
+Kontakt Cactus Data, hvis det ikke er tilfældet, for **NovaXport** vil ikke eksportere fakturaer uden denne forbindelse.
 
 <hr>
 
