@@ -204,12 +204,13 @@ Feltoversigt:
 | Name                | Selskabsnavn | Valgfrit | Tekst                   |
 | AgreementGrantToken | Adgangs-ID   | Ja       | 44 cifre/bogstaver      |
 | Inactive            | Status       | Nej      | Ingenting               |
-| FirstDate           | Datous       | Valgfrit | En dato eller ingenting |
+| FirstDate           | Dato         | Valgfrit | En dato eller ingenting |
 
 Resultatet skal (hvis uden selskabsnavn) ligne dette (feltet _FirstDate_ er dog ikke vist):
 
 ![Tilknyt selskab][New company]
 
+I eksemplet her vil **NovaXport** kun eksportere fakturaer fra 2. kvartal 2023 og frem.
 
 ### Tilføj server
 
@@ -226,27 +227,34 @@ Gå til en ny post og indsæt i felterne *Hostname* og *ShareName* hhv. serveren
 
 Felterne *Id* og *Inactive* vil allerede være udfyldte og må ikke ændres. 
 
+Feltet *FirstDate* kan være tomt, og **NovaXport** vil da hente fakturafiler fra det aktuelle regnskabsårs start. Ønsker man kun at hente fakturafiler fra en senere dato - fx fordi fakturaer ældre end denne dato allerede på anden vis er bogført i e-conomic - skrives datoen ind her.
+
 > **VIGTIGT**: Ændringer/tilføjelser gemmes først, når man klikker på *Write Changes* eller taster *Ctrl+S*.
 
 Feltoversigt:
 
-| Felt      | Indhold         | Udfyldes | Indtastes |
-| :-------- | :-------------- | :------- | :-------- |
-| Id        | Løbenummer      | Nej      | Ingenting |
-| Hostname  | Servernavn      | Ja       | Tekst     |
-| ShareName | Delt mappe-navn | Ja       | Tekst     |
-| Inactive  | Status          | Nej      | Ingenting |
+| Felt      | Indhold         | Udfyldes | Indtastes               |
+| :-------- | :-------------- | :------- | :---------------------- |
+| Id        | Løbenummer      | Nej      | Ingenting               |
+| Hostname  | Servernavn      | Ja       | Tekst                   |
+| ShareName | Delt mappe-navn | Ja       | Tekst                   |
+| Inactive  | Status          | Nej      | Ingenting               |
+| FirstDate | Dato            | Valgfrit | En dato eller ingenting |
 
 Resultatet skal ligne dette:
 
 ![Tilknyt server][New server]
+
+I eksemplet her vil **NovaXport** kun hente fakturafiler fra 4. kvartal 2023 og senere.
+
+> Når **NovaXport** kører, vil feltet *FirstDate* løbende blive opdateret med den seneste dato på de hentede fakturafiler.
 
 
 ### Justér tidsplan
 
 Når **NovaXport** tjenesten kører, sker det efter en tidsplan. Efter hver kørsel ser den i tidsplanen, hvor mange minutters pause, den skal holde, før næste kørsel.
 
-Som udgangspunkt er oprettet 24 timeintervaller, hvor pausen er sat til 15 minutter fra kl. 06.00.
+Som udgangspunkt er oprettet 24 timeintervaller, hvor pausen er sat til 15 minutter fra kl. 07.00 frem til aften.
 
 Både tidsintervaller og pauser kan justeres til det aktuelle behov, og tidsplanen kan helt eller delvist sættes til kun at være aktiv på hverdage.
 
@@ -265,12 +273,12 @@ Feltoversigt:
 | Felt      | Indhold     | Udfyldes | Indtastes                    |
 | :-------- | :---------- | :------- | :--------------------------- |
 | StartTime | Dato og tid | Ja       | En dato og ønsket starttid   |
-| Interval  | Minutter    | Ja       | 0 eller et positivt tal               |
+| Interval  | Minutter    | Ja       | 0 eller et positivt tal      |
 | Weekend   | 0 eller 1   | Ja       | 1 for ingen kørsel i weekend |
 
 > Fra feltet *StartTime* læses kun tidsdelen, men undlad alligevel at indtaste andre datoer end 0001-01-01.
 
-Standardtidsplanen ser således ud:
+Standardtidsplanen kan se således ud:
 
 ![Tidsplan][New schedule]
 
