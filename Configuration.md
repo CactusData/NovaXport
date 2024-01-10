@@ -100,40 +100,53 @@ Du skal have en *superbruger/administrator*-brugerkonto til e-conomic til rådig
 1. Log ind med denne brugerkonto på [Visma Home][Visma home]
 2. Hvis I har flere selskaber, så vælg det, der skal eksporteres til fra NOVAX
 3. Vælg fra topmenuen *Indstillinger* punktet *Alle indstillinger*
-4. Vælg i menuen til venstre punktet *Apps*
-5. Nu vises enten en liste med de apps, der tidligere er aktiveret, eller denne side: *Sådan tilføjer du apps*
+4. Vælg i menuen til venstre punktet _Apps_
+5. Nu vises enten en liste med de apps, der tidligere er aktiveret, eller siden med titlen: *Sådan tilføjer du apps*
+6. **Notér dig aftaltenummeret** (oppe til højre), fx 1234567
 
-6.  1. *Kopiér* nu [dette link][App link]
+7.  1. *Kopiér* nu [dette link][App link]
     2. Åbn en ny side i browseren
-    3. *Indsæt* derefter linket (kopieret ovenfor) browserens søgelinje (URL) og tryk *Enter*
+    3. *Indsæt* derefter linket (kopieret ovenfor) i browserens søgelinje (URL) og tryk *Enter*
     4. Denne side vises nu:
 
     <br>![Tilføj app][Attach app]<br>
     
-    5. **Kontrollér, at aftalenummeret er korrekt**
+    5. **Kontrollér, at aftalenummeret er korrekt**, her er vist 1234567
     6. Klik på knappen *Tilføj app*
-    7. Denne side vises nu:
+    7. **NovaXport**-siden vises som bekræftelse på tilføjelsen
+    8. Klik to gange _tilbage_ i browseren (venstrepil øverst til venstre)
+    9. Denne side vises nu:
 
-    <br>![App tilføjet][Attached app]<br>
+    <br>![App-liste][App list]</br>
+    
+    10. Det viste **Adgangs-ID** er det, som skal bruges ved konfigurationen af NovaXport (se næste afsnit)
 
-    8. Det viste ID er det **Adgangs-ID**, som skal bruges ved konfigurationen af NovaXport (se næste afsnit)
-    9. Luk siden
+Nu vil _e-conomic_ tillade dit selskab og **NovaXport** at kommunikere indbyrdes.
 
-8. Opdatér [siden med dine apps i e-conomic][EC extensions] for at få vist og bekræftet tilknytningen af appen:
-
-![App-liste][App list]
-
-Når dette er på plads, vil e-conomic nu tillade dit selskab og NovaXport at kommunikere indbyrdes.
+Næste skridt er at fortælle **NovaXport**, at dette Adgangs-ID skal bruges ved eksport til dette selskab i e-conomic.
 
 
 #### 2. Justér og kontrollér selskabets opsætning i e-conomic
 
 Før **NovaXport** kan eksportere fakturaer, skal følgende være oprettet:
 
-- Kundegruppe 100
-- Varegruppe 100
-- Afdeling 10000 (hvis afdelinger/dimensioner er i brug i e-conomic)
+**Kundegruppe 100**:
 
+> _Vigtigt_: Vælg layout som vist.
+
+![Kundegruppe 100][Kundegruppe 100]
+
+**Varegruppe 100**:
+
+> _Vigtigt_: Kontrollér kontonumrene.
+
+![Varegruppe 100][Varegruppe 100]
+
+**Afdeling 10000** (hvis afdelinger/dimensioner er i brug i e-conomic):
+
+![Afdeling 10000][Afdeling 10000]
+
+##### Bogføring af fakturaer i e-conomic 
 For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have disse oplysninger:
 
 1. En kunde (klient/patient)
@@ -146,18 +159,19 @@ For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have
 
 Det sker på to forskellige måder afhængig af, om kunden er en privatperson eller er en myndighed eller en erhvervsvirksomhed
 
-#### Erhverv og myndigheder
+###### Erhverv og myndigheder
 
 Disse har altid et CVR- eller EAN-nummer og eksporteres således:
 
 - For hver faktura, der skal eksporteres, vil **NovaXport** forsøge at finde kunden, først via CVR-nummeret for erhvervskunder, dernæst via navnet. Findes ikke et eksakt match, oprettes kunden og knyttes til kundegruppe 100
-- Momszone og layout hentes fra kundens kundegruppe
+- Momszone vælges ud fra kundens data som angivet i Novax
 - Nye varenumre knyttes til varegruppe 100
 - Hvis en betalingsbetingelse med forfaldsdato ikke findes i e-conomic, oprettes den med navnet "Standard"
+- Layout hentes fra kundens kundegruppe
 - Kunden vil fremstå som adressat på fakturaudskriften
 - klientens/patientens CPR-nummer angives på fakturaen som en reference
 
-#### Privatpersoner
+###### Privatpersoner
 
 Disse har altid et CPR-nummer, men oprettes ikke som separate kunder. I stedet knyttes de til en "samlekunde" knyttet til kundegruppe 100. Denne samlekunde oprettes (automatisk) med klinikkens ydernummer som kundenummer, fx:
 
@@ -336,8 +350,11 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 [Missing invoice list email]: images/MissingInvoices.png
 [Installation]: https://github.com/CactusData/NovaXport/blob/main/Installation.md
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
-[App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=ToVYPF4QxTW73TcmtKPZtQCTwjKJlAwu0cPn3LEOE201
+[App link]: https://secure.e-conomic.com/secure/api1/requestaccess.aspx?appPublicToken=F1sRys0ygqsIdNgfd2bcaaJODr3MM0KSGsOBBggjiKM1&redirectUrl=https%3A%2F%2Fcactusdata.github.io%2FNovaXport%2F
 [Visma home]: https://connect.visma.com/
+[Kundegruppe 100]: images/ec-kundegruppe100.png
+[Varegruppe 100]: images/ec-varegruppe100.png
+[Afdeling 10000]: images/ec-afdeling10000.png
 [Installation]: https://cactusdata.github.io/NovaXport/Installation
 [Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
 [Main page]: https://cactusdata.github.io/NovaXport/
