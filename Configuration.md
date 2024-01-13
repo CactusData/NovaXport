@@ -146,6 +146,12 @@ Før **NovaXport** kan eksportere fakturaer, skal følgende være oprettet:
 
 ![Afdeling 10000][Afdeling 10000]
 
+**Afdeling for ydernummer** (hvis afdelinger/dimensioner er i brug i e-conomic):
+
+> VIGTIGT: For hvert _ydernummer_, der faktures for, skal en afdeling oprettes med _ydernummeret som afdelingsnummer_.
+>
+> Er afdelingsnummeret ikke oprettet, vil **NovaXport** ikke eksportere fakturaer fra denne klinik til selskabet.
+
 ##### Bogføring af fakturaer i e-conomic 
 For at en faktura/kreditnota kan oprettes og bogføres i e-conomic skal den have disse oplysninger:
 
