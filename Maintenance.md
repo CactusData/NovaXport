@@ -231,4 +231,4 @@ Pkt. 3. og 4. må udføres manuelt.
 [Configuration]: https://cactusdata.github.io/NovaXport/Configuration
 [Configuration company]: https://cactusdata.github.io/NovaXport/Configuration#tilf%C3%B8j-selskab-klinik
 [Configuration server]: https://cactusdata.github.io/NovaXport/Configuration#tilf%C3%B8j-server
-[Main page]: https://cactusdata.github.io/NovaXport/
+[Main page]: https://cactusdata.github.io/NovaXport/#supplerende-information

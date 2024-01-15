@@ -363,4 +363,4 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 [Afdeling 10000]: images/ec-afdeling10000.png
 [Installation]: https://cactusdata.github.io/NovaXport/Installation
 [Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
-[Main page]: https://cactusdata.github.io/NovaXport/
+[Main page]: https://cactusdata.github.io/NovaXport/#supplerende-information

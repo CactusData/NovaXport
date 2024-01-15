@@ -326,4 +326,4 @@ Kontakt Cactus Data, hvis det ikke er tilfældet, for **NovaXport** vil ikke eks
 [EC extensions]: https://secure.e-conomic.com/settings/extensions/apps
 [Configuration]: https://cactusdata.github.io/NovaXport/Configuration
 [Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
-[Main page]: https://cactusdata.github.io/NovaXport/
+[Main page]: https://cactusdata.github.io/NovaXport/#supplerende-information
