@@ -201,7 +201,7 @@ Disse fakturaer eksporteres dermed således:
 
 Åbn databasen med databasemanageren. Bruges genvejen (anbefalet under [Installation][Installation]), vises straks tabellen *Company*, som indeholder listen med selskaber. Hvis en anden tabel vises, så vælg *Company* i kombinationsfeltet *Table*.
 
-Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken* hhv. selskabets *CVR-nummer* og det *Adgangs-ID*, der blev oprettet i e-conomic - se afsnittet ovenfor.
+Gå til en ny post og indsæt i felterne *Cvr* og *AgreementGrantToken* hhv. selskabets *CVR-nummer* og det *Adgangs-ID*, der blev oprettet i e-conomic - se [pkt. 1][Punkt 1] ovenfor.
 
 > Tip: Brug *kopiér/indsæt* med mus eller tastatur til at indsætte *Adgang-ID*.
 
@@ -364,4 +364,5 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 [Installation]: https://cactusdata.github.io/NovaXport/Installation
 [Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
 [Main page]: https://cactusdata.github.io/NovaXport/#supplerende-information
+[Punkt 1]: https://cactusdata.github.io/NovaXport/Configuration#1-tilknyt-app-i-e-conomic
 [Punkt 3]: https://cactusdata.github.io/NovaXport/Configuration#3-tilknyt-selskab-i-novaxport
