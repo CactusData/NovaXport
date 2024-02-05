@@ -123,7 +123,7 @@ Du skal have en *superbruger/administrator*-brugerkonto til e-conomic til rådig
 
 Nu vil _e-conomic_ tillade dit selskab og **NovaXport** at kommunikere indbyrdes.
 
-Næste skridt er at fortælle **NovaXport**, at dette Adgangs-ID skal bruges ved eksport til dette selskab i e-conomic.
+Derfor skal **NovaXport** også vide, at dette Adgangs-ID skal bruges ved eksport til dette selskab i e-conomic. Det gøres som beskrevet under [pkt. 3][Punkt 3] herunder.
 
 
 #### 2. Justér og kontrollér selskabets opsætning i e-conomic
@@ -185,7 +185,7 @@ Disse har altid et CPR-nummer, men oprettes ikke som separate kunder. I stedet k
 
 Hvis flere klinikker er knyttet til det samme selskab, vil der derfor findes en samlekunde for hver klinik.
 
-Disse fakturaer eksporteres derfor således:
+Disse fakturaer eksporteres dermed således:
 
 - For hver faktura, der skal eksporteres, vil **NovaXport** finde klinikkens samlekunde ud fra ydernummeret
 - Momszone og layout hentes fra samlekundens kundegruppe
@@ -226,7 +226,7 @@ Feltoversigt:
 | Inactive            | Status       | Nej      | Ingenting               |
 | FirstDate           | Dato         | Valgfrit | En dato eller ingenting |
 
-Resultatet skal (hvis uden selskabsnavn) ligne dette (feltet _FirstDate_ er dog ikke vist):
+Resultatet skal (hvis uden selskabsnavn) ligne dette:
 
 ![Tilknyt selskab][New company]
 
@@ -364,3 +364,4 @@ Kører **NovaXport** ikke, kan den nu startes - enten manuelt under *Tjenester* 
 [Installation]: https://cactusdata.github.io/NovaXport/Installation
 [Maintenance]: https://cactusdata.github.io/NovaXport/Maintenance
 [Main page]: https://cactusdata.github.io/NovaXport/#supplerende-information
+[Punkt 3]: https://cactusdata.github.io/NovaXport/Configuration#3-tilknyt-selskab-i-novaxport
