@@ -148,7 +148,7 @@ Før **NovaXport** kan eksportere fakturaer, skal følgende være oprettet:
 
 **Afdeling for ydernummer** (hvis afdelinger/dimensioner er i brug i e-conomic):
 
-> VIGTIGT: For hvert _ydernummer_, der faktures for, skal en afdeling oprettes med _ydernummeret som afdelingsnummer_.
+> VIGTIGT: For hvert _ydernummer_, der faktureres for, skal en afdeling oprettes med _ydernummeret som afdelingsnummer_.
 >
 > Er afdelingsnummeret ikke oprettet, vil **NovaXport** ikke eksportere fakturaer fra denne klinik til selskabet.
 
